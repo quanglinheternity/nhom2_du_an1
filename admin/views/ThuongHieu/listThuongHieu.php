@@ -59,6 +59,7 @@ include './views/layout/navbar.php'
                   <tr>
                     <th>STT</th>
                     <th>Tên thương hiệu</th>
+                    <th>Ảnh thương hiệu</th>
                     <th>Mô tả</th>
                     <th>Thao tác</th>
 
@@ -71,6 +72,9 @@ include './views/layout/navbar.php'
                     <tr>
                       <td><?= $key + 1 ?></td>
                       <td><?= $ThuongHieu['ten_thuong_hieu'] ?></td>
+                      <td>
+                      <img src="<?= BASE_URL .$ThuongHieu['hinh_anh'] ?>" style="max-width: 120px; max-height: 140px" >
+                      </td>
                       <td><?= $ThuongHieu['mo_ta'] ?></td>
                       <td>
                         <div class="btn-group btn-group-sm">
@@ -87,6 +91,7 @@ include './views/layout/navbar.php'
                   <tr>
                     <th>STT</th>
                     <th>Tên thương hiệu</th>
+                    <th>Ảnh thương hiệu</th>
                     <th>Mô tả</th>
                     <th>Thao tác</th>
 

@@ -44,13 +44,20 @@ include './views/layout/navbar.php'
             </div>
 
 
-            <form action="<?= BASE_URL_ADMIN . '?act=sua_thuong_hieu&id_thuong_hieu=' . $thuongHieu['id'] ?>" method="POST">
+            <form action="<?= BASE_URL_ADMIN . '?act=sua_thuong_hieu&id_thuong_hieu=' . $thuongHieu['id'] ?>" method="POST" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="form-group">
                   <label >Tên thương hiệu</label>
                   <input type="text" class="form-control" name="ten_thuong_hieu" value="<?= $thuongHieu['ten_thuong_hieu'] ?>" placeholder="Nhập tên thương hiệu">
                   <?php if(isset($error['ten_thuong_hieu'])){ ?>
                     <p class="text-danger"><?= $error['ten_thuong_hieu'] ?></p>
+                  <?php } ?>
+                </div>
+                <div class="form-group col-6">
+                  <label >Ảnh thương hiệu</label>
+                  <input type="file" class="form-control" name="hinh_anh" >
+                  <?php if(isset($_SESSION['error']['hinh_anh'])){ ?>
+                    <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
                   <?php } ?>
                 </div>
                 <div class="form-group">

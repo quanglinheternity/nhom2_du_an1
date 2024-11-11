@@ -18,15 +18,16 @@ class AdminThuongHieu
             return $e->getMessage();
         }
     }
-    public function insertThuongHieu($ten_thuong_hieu, $mo_ta)
+    public function insertThuongHieu($ten_thuong_hieu, $file_thumb, $mo_ta)
     {
         try {
-            $sql = "INSERT INTO thuong_hieu(ten_thuong_hieu, mo_ta) VALUES (:ten_thuong_hieu, :mo_ta)";
+            $sql = "INSERT INTO thuong_hieu(ten_thuong_hieu, hinh_anh, mo_ta) VALUES (:ten_thuong_hieu,:hinh_anh, :mo_ta)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(
                 [
 
                     ':ten_thuong_hieu' => $ten_thuong_hieu,
+                    ':hinh_anh' => $file_thumb,
                     ':mo_ta' => $mo_ta
                 ]
             );
@@ -49,15 +50,16 @@ class AdminThuongHieu
             return $e->getMessage();
         }
     }
-    public function updateThuongHieu($id, $ten_thuong_hieu, $mo_ta)
+    public function updateThuongHieu($id, $ten_thuong_hieu,$new_file, $mo_ta)
     {
         try {
-            $sql = "UPDATE thuong_hieu SET ten_thuong_hieu = :ten_thuong_hieu, mo_ta = :mo_ta WHERE id = :id";
+            $sql = "UPDATE thuong_hieu SET ten_thuong_hieu = :ten_thuong_hieu,hinh_anh = :hinh_anh, mo_ta = :mo_ta WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(
                 [
 
                     ':ten_thuong_hieu' => $ten_thuong_hieu,
+                    ':hinh_anh' => $new_file,
                     ':mo_ta' => $mo_ta,
                     ':id' => $_GET['id_thuong_hieu']
                 ]
