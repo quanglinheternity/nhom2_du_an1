@@ -8,11 +8,15 @@ require_once '../commons/function.php'; // Hàm hỗ trợ
 // Require toàn bộ file Controllers
 require_once './controllers/DashboardController.php';
 require_once './controllers/AdminThuongHieuController.php';
+require_once './controllers/AdminsanPhamController.php';
+
 
 
 
 // Require toàn bộ file Models
 require_once './models/AdminThuongHieu.php';
+require_once './models/AdminSanPham.php';
+
 
 
 // Route
@@ -29,7 +33,16 @@ match ($act) {
     'form_sua_thuong_hieu'=>(new AdminThuongHieuController())->formEditThuongHieu(),
     'sua_thuong_hieu'=>(new AdminThuongHieuController())->postEditThuongHieu(),
     'xoa_thuong_hieu'=>(new AdminThuongHieuController())->deleteThuongHieu(),
+     
 
 
-    
+    //san pham 
+    'san_pham'=>(new AdminSanPhamController())->danhSachSanPham(),
+    'form_them_san_pham'=>(new AdminSanPhamController())->formAddSanPham(),
+    'them_san_pham'=>(new AdminSanPhamController())->postAddSanPham(),
+    'form_sua_san_pham'=>(new AdminSanPhamController())->formEditSanPham(),
+    'sua_san_pham'=>(new AdminSanPhamController())->postEditSanPham(),
+    'xoa_san_pham'=>(new AdminSanPhamController())->deleteSanPham(),
+    'chi_tiet_san_pham'=>(new AdminSanPhamController())->detailSanPham()
+ 
 };
