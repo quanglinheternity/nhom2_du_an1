@@ -89,7 +89,7 @@ function formatDate($date) {
     return date('d/m/Y', strtotime($date));
 }
 function checkLoginAdmin(){
-    if(!isset($_SESSION['admin'])) {
+    if(!isset($_SESSION['user_admin'])) {
         //không có session thi chuyển huỳ trang login
         header('location: ' . BASE_URL_ADMIN . '?act=login_admin');
         exit();

@@ -49,7 +49,7 @@ class AdminTaiKhoanController
             //nếu không có lỗi tiến hành thêm danh mục
             if (empty($error)) {
                 //pass mặc định
-                $password = password_hash('Qlinh@369', PASSWORD_BCRYPT);
+                $password = password_hash('Qlinh371', PASSWORD_BCRYPT);
                 //khai bao chức vụ
                 $chuc_vu_id = 1;
                 $s = $this->moldedTaiKhoan->insertTaiKhoanQuanTri($ho_ten, $email, $so_dien_thoai,$password, $chuc_vu_id);
@@ -136,7 +136,7 @@ class AdminTaiKhoanController
         $tai_khoan_id = $_GET['id_quan_tri'] ?? '';
         $tai_khoan = $this->moldedTaiKhoan->getTaiKhoanQuanTriById($tai_khoan_id);
 
-        $password = password_hash('123@123ab', PASSWORD_BCRYPT);
+        $password = password_hash('Qlinh371', PASSWORD_BCRYPT);
         $sataus = $this->moldedTaiKhoan->resetPassword($tai_khoan_id, $password);
         if ($sataus && $tai_khoan['chuc_vu_id'] == 1) {
             header('location:' . BASE_URL_ADMIN . '?act=list_tai_khoan_quan_tri');
@@ -149,9 +149,45 @@ class AdminTaiKhoanController
             die();
         }
     }
+    public function formLogin()
+    {
+        require_once './views/auth/formLogin.php';
+        deleteSessionError();
+    }
+    public function login()
+    { 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            // var_dump($email,$password);die();
+            //xử lý đăng nhận kiểm tra
+            $user = $this->moldedTaiKhoan->checkLogin($email, $password);
+            if ($user == $email) {
+                $_SESSION['user_admin'] = $user;
+                header('location: ' . BASE_URL_ADMIN);
+                exit();
+            } else {
+                $_SESSION['error'] = $user;
+                // var_dump($_SESSION['error']);die();
+                $_SESSION['flash'] = true;
+                header('location: ' . BASE_URL_ADMIN . '?act=login_admin');
+                exit();
+            }
+
+        }
+
+    }
+    public function logout()
+    {
+        if (isset($_SESSION['user_admin'])) {
+            unset($_SESSION['user_admin']);
+
+        }
+        header('location: ' . BASE_URL_ADMIN . '?act=login_admin');
+        exit();
+    }
+        
     
-    
-   
    
    
 }
