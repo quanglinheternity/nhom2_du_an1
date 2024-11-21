@@ -19,7 +19,7 @@ require_once './models/AdminTaiKhoan.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
-
+if($act !== 'login_admin'&& $act !== 'logout_admin' && $act !== 'check_login_admin') checkLoginAdmin();
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 // Các Thầy.Cô có thể dùng Switch-Case
 match ($act) {
@@ -39,7 +39,10 @@ match ($act) {
     'sua_quan_tri'=>(new AdminTaiKhoanController())->postEditTaiKhoanQuanTri(),
     'reset_password'=>(new AdminTaiKhoanController())->resetPassword(),
     
-    
+    //route auth
+    'login_admin'=>(new AdminTaiKhoanController())->formLogin(),
+    'check_login_admin'=>(new AdminTaiKhoanController())->login(),
+    'logout_admin'=>(new AdminTaiKhoanController())->logOut(),
 
     
 };
