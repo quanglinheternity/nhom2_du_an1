@@ -8,20 +8,28 @@ require_once '../commons/function.php'; // Hàm hỗ trợ
 // Require toàn bộ file Controllers
 require_once './controllers/DashboardController.php';
 require_once './controllers/AdminThuongHieuController.php';
+
 require_once './controllers/AdminsanPhamController.php';
+
+
+require_once './controllers/AdminTaiKhoanController.php';
 
 
 
 
 // Require toàn bộ file Models
 require_once './models/AdminThuongHieu.php';
+
 require_once './models/AdminSanPham.php';
+
+
+require_once './models/AdminTaiKhoan.php';
 
 
 
 // Route
 $act = $_GET['act'] ?? '/';
-
+if($act !== 'login_admin'&& $act !== 'logout_admin' && $act !== 'check_login_admin') checkLoginAdmin();
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 // Các Thầy.Cô có thể dùng Switch-Case
 match ($act) {
@@ -33,7 +41,18 @@ match ($act) {
     'form_sua_thuong_hieu'=>(new AdminThuongHieuController())->formEditThuongHieu(),
     'sua_thuong_hieu'=>(new AdminThuongHieuController())->postEditThuongHieu(),
     'xoa_thuong_hieu'=>(new AdminThuongHieuController())->deleteThuongHieu(),
-     
+    // tài khoản quản trị
+    'list_tai_khoan_quan_tri'=>(new AdminTaiKhoanController())->listTaiKhoanQuanTri(),
+    'form_them_quan_tri'=>(new AdminTaiKhoanController())->formAddTaiKhoanQuanTri(),
+    'them_quan_tri'=>(new AdminTaiKhoanController())->postAddTaiKhoanQuanTri(),
+    'form_sua_quan_tri'=>(new AdminTaiKhoanController())->formEditTaiKhoanQuanTri(),
+    'sua_quan_tri'=>(new AdminTaiKhoanController())->postEditTaiKhoanQuanTri(),
+    'reset_password'=>(new AdminTaiKhoanController())->resetPassword(),
+    
+    //route auth
+    'login_admin'=>(new AdminTaiKhoanController())->formLogin(),
+    'check_login_admin'=>(new AdminTaiKhoanController())->login(),
+    'logout_admin'=>(new AdminTaiKhoanController())->logOut(),
 
 
     //san pham 

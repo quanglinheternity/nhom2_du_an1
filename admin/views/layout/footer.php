@@ -1,8 +1,8 @@
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-     By <b>QUANGLINH</b> 05/09/2005
+     By <b>Nhóm 2</b> Dự án 1
     </div>
-    <strong>Website bán thú cưng</strong>
+    <strong>Website bán nước hoa</strong>
   </footer>
 
   <!-- Control Sidebar -->

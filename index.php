@@ -9,7 +9,7 @@ require_once "./controllers/HomeController.php";
 
 
 // Require toàn bộ file Models
-
+require_once "./models/SanPham.php";
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -19,4 +19,5 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     // Trang chủ
     '/' => (new HomeController())->home(),
+    'chi_tiet_san_pham'=> (new HomeController())->chiTietSanPham(),
 };
