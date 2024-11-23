@@ -1,22 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- header? -->
+<?php
+require './views/layout/header.php'
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Tổng Quan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+  ?>
+<!-- end header -->
+<!-- sidebar -->
+<?php
+require './views/layout/sidebar.php'
 
-<body>
-    <?php include('./views/components/navbar.php'); ?>
+  ?>
+<!-- end sidebar -->
 
-    <div class="container">
-        <div class="row">
-            <h1>Trang Tổng Quan admin</h1>
+<!-- Navbar -->
+<?php
+include './views/layout/navbar.php'
+  ?>
+<!-- /.navbar -->
+
+<!-- Main Sidebar Container -->
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Thống kê</h1>
+          <?php var_dump($_SESSION['user_admin']) ?>
         </div>
-    </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!-- footer -->
+<?php
+include './views/layout/footer.php'
+  ?>
+<!-- end footer -->
+
+
+<!-- Code injected by live-server -->
+
 </body>
+
 
 </html>

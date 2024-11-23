@@ -77,7 +77,7 @@ class AdminThuongHieuController
             // xu ly upload file
             $error = [];
             if (isset($hinh_anh) && $hinh_anh['error'] == UPLOAD_ERR_OK) {
-                $new_file = uploadFile($hinh_anh, './uploads/');
+                $new_file = uploadFile($hinh_anh, './uploads/logo/');
                 if (!empty($old_file)) {
                     deleteFile($old_file);
                 }
