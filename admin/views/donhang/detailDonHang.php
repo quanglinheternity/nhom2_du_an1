@@ -59,7 +59,7 @@ include './views/layout/navbar.php'
               <div class="row">
                 <div class="col-12">
                   <h4>
-                    <i class="fas fa-globe"></i> Shop thú cưng.
+                    <i class="fas fa-globe"></i> Shop Bán nước hoa
                     <small class="float-right">Ngày đặt: <?php echo formatDate($donHang['ngay_dat']) ?></small>
                   </h4>
                 </div>
