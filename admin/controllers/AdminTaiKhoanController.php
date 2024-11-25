@@ -177,6 +177,7 @@ class AdminTaiKhoanController
     {
         if (isset($_SESSION['user_admin'])) {
             unset($_SESSION['user_admin']);
+            unset($_SESSION['error']);
         }
         header('location: ' . BASE_URL_ADMIN . '?act=login_admin');
         exit();
