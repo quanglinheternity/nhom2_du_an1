@@ -27,7 +27,7 @@ class AdminThuongHieuController
             $ten_thuong_hieu = $_POST['ten_thuong_hieu'] ?? '';
             $mo_ta = $_POST['mo_ta'] ?? '';
             $hinh_anh = $_FILES['hinh_anh'] ?? null;
-         
+
             $file_thumb = uploadFile($hinh_anh, './uploads/logo/');
             // echo $file_thumb;die();
             // xu ly upload file
@@ -42,7 +42,7 @@ class AdminThuongHieuController
             // debug($_SESSION['error'])  ;die();
             //nếu không có lỗi tiến hành thêm danh mục
             if (empty($error)) {
-                $this->moldedThuongHieu->insertThuongHieu($ten_thuong_hieu,$file_thumb, $mo_ta);
+                $this->moldedThuongHieu->insertThuongHieu($ten_thuong_hieu, $file_thumb, $mo_ta);
                 header('location: ' . BASE_URL_ADMIN . '?act=thuong_hieu');
             } else {
 
@@ -66,14 +66,14 @@ class AdminThuongHieuController
         //kiểm tra thêm dữ liệu có phải được submit ko
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //lấy dữ liệu
-            $id = $_GET['id_thuong_hieu']?? '';
+            $id = $_GET['id_thuong_hieu'] ?? '';
             $ten_thuong_hieu = $_POST['ten_thuong_hieu'] ?? '';
             $thuongHieuOld = $this->moldedThuongHieu->getThuongHieuById($id);
 
-            $old_file = $thuongHieuOld['hinh_anh'];//ảnh cũ
+            $old_file = $thuongHieuOld['hinh_anh']; //ảnh cũ
             $mo_ta = $_POST['mo_ta'] ?? '';
             $hinh_anh = $_FILES['hinh_anh'] ?? null;
-         
+
             // xu ly upload file
             $error = [];
             if (isset($hinh_anh) && $hinh_anh['error'] == UPLOAD_ERR_OK) {
@@ -87,10 +87,10 @@ class AdminThuongHieuController
             if (empty($ten_thuong_hieu)) {
                 $error['ten_thuong_hieu'] = "Tên thương hiệu không được để trống";
             }
-            $_SESSION['error']=$error;
+            $_SESSION['error'] = $error;
             //nếu không có lỗi tiến hành thêm danh mục
             if (empty($error)) {
-                $this->moldedThuongHieu->updateThuongHieu($id, $ten_thuong_hieu,$new_file ,$mo_ta);
+                $this->moldedThuongHieu->updateThuongHieu($id, $ten_thuong_hieu, $new_file, $mo_ta);
                 header('location: ' . BASE_URL_ADMIN . '?act=thuong_hieu');
                 // var_dump($ten_thuong_hieu);
             } else {
@@ -101,11 +101,10 @@ class AdminThuongHieuController
             }
         }
     }
-    public function deleteThuongHieu(){
+    public function deleteThuongHieu()
+    {
         $id = $_GET['id_thuong_hieu'];
         $this->moldedThuongHieu->deleteThuongHieu($id);
         header('location: ' . BASE_URL_ADMIN . '?act=thuong_hieu');
     }
-
 }
-?>

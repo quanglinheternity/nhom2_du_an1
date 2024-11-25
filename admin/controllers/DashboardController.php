@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 class DashboardController
 {
-    public function dashboard() {
+    public function dashboard()
+    {
         require_once './views/dashboard.php';
     }
 }

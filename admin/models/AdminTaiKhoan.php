@@ -23,7 +23,7 @@ class AdminTaiKhoan
         }
     }
 
-    public function insertTaiKhoanQuanTri($ho_ten, $email,$so_dien_thoai, $password, $chuc_vu_id)
+    public function insertTaiKhoanQuanTri($ho_ten, $email, $so_dien_thoai, $password, $chuc_vu_id)
     {
         try {
             $sql = 'INSERT INTO tai_khoans(ho_ten, email ,so_dien_thoai, mat_khau,chuc_vu_id) 
@@ -96,8 +96,9 @@ class AdminTaiKhoan
             return $e->getMessage();
         }
     }
-    
-    public function checkLogin($email, $password){
+
+    public function checkLogin($email, $password)
+    {
         try {
             $sql = "SELECT * FROM tai_khoans WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
@@ -108,25 +109,21 @@ class AdminTaiKhoan
             );
 
             $user = $stmt->fetch();
-            if($user && password_verify($password, $user['mat_khau'] )){
-                if( $user['chuc_vu_id'] == 1){
-                    if($user['trang_thai'] == 1){
+            if ($user && password_verify($password, $user['mat_khau'])) {
+                if ($user['chuc_vu_id'] == 1) {
+                    if ($user['trang_thai'] == 1) {
                         return $user['email'];
-                    }else{
+                    } else {
                         return "Tài khoản bị khóa";
                     }
-                }else {
+                } else {
                     return "Tài khoản không có quyền quản trị";
                 }
-            }else{
+            } else {
                 return "Lỗi đăng nhập tài khoản mật không đúng";
             }
-
         } catch (PDOException $e) {
             return $e->getMessage();
         }
     }
-   
-    
-    
 }
