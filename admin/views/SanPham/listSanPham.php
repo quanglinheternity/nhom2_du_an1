@@ -2,19 +2,19 @@
 <?php
 require './views/layout/header.php'
 
-  ?>
+?>
 <!-- end header -->
 <!-- sidebar -->
 <?php
 require './views/layout/sidebar.php'
 
-  ?>
+?>
 <!-- end sidebar -->
 
 <!-- Navbar -->
 <?php
 include './views/layout/navbar.php'
-  ?>
+?>
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
@@ -39,7 +39,7 @@ include './views/layout/navbar.php'
       <div class="row">
         <div class="col-12">
           <div class="card">
-       
+
             <!-- /.card-header -->
 
             <!-- /.card-body -->
@@ -70,41 +70,41 @@ include './views/layout/navbar.php'
                 </thead>
                 <tbody>
                   <?php
-                  foreach ($listSanPham as $key=>$SanPham) {?>
-                    <tr> 
+                  foreach ($listSanPham as $key => $SanPham) { ?>
+                    <tr>
                       <td><?= $key + 1 ?></td>
                       <td><?= $SanPham['ten_san_pham'] ?></td>
                       <td>
-                        <img src="<?= BASE_URL.$SanPham['hinh_anh']?>" style="width:100px;height:100px" alt="" >
+                        <img src="<?= BASE_URL . $SanPham['hinh_anh'] ?>" style="width:100px;height:100px" alt="">
                       </td>
                       <td><?= $SanPham['gia_san_pham'] ?></td>
                       <td><?= $SanPham['so_luong'] ?></td>
                       <td><?= $SanPham['ten_thuong_hieu'] ?></td>
-                      <td><?= $SanPham['trang_thai'] == 1 ? 'Còn Bán':'Dừng Bán'?></td>
+                      <td><?= $SanPham['trang_thai'] == 1 ? 'Còn Bán' : 'Dừng Bán' ?></td>
                       <td>
                         <div class="btn-group">
-                        <a href="?act=chi_tiet_san_pham&id_san_pham=<?=$SanPham['id'] ?>">
-                        <button class="btn btn-warning m"><i class="fas fa-eye"></i></button></a>
-                          <a href="?act=form_sua_san_pham&id_san_pham=<?=$SanPham['id'] ?>">
+                          <a href="?act=chi_tiet_san_pham&id_san_pham=<?= $SanPham['id'] ?>">
+                            <button class="btn btn-primary m"><i class="fas fa-eye"></i></button></a>
+                          <a href="?act=form_sua_san_pham&id_san_pham=<?= $SanPham['id'] ?>">
                             <button class="btn btn-warning m"><i class="fas fa-tools"></i></button></a>
                           <a href="?act=xoa_san_pham&id_san_pham=<?= $SanPham['id'] ?>"
 
-                          onclick="return confirm('Bạn có muốn xóa không?')" >
-                          <button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
+                            onclick="return confirm('Bạn có muốn xóa không?')">
+                            <button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
 
                         </div>
-                        
-                          
+
+
 
                       </td>
                     </tr>
-                    <?php } ?>
+                  <?php } ?>
 
 
                 </tbody>
                 <tfoot>
                   <tr>
-                  <th>STT</th>
+                    <th>STT</th>
                     <th>Tên sản Phẩm</th>
                     <th>Ảnh Sản Phẩm</th>
                     <th>Giá Tiền</th>
@@ -132,13 +132,15 @@ include './views/layout/navbar.php'
 <!-- footer -->
 <?php
 include './views/layout/footer.php'
-  ?>
+?>
 <!-- end footer -->
 
 <script>
-  $(function () {
+  $(function() {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({

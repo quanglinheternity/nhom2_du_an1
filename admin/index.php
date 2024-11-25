@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 // Require file Common
@@ -29,39 +29,43 @@ require_once './models/AdminTaiKhoan.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
-if($act !== 'login_admin'&& $act !== 'logout_admin' && $act !== 'check_login_admin') checkLoginAdmin();
+// if($act !== 'login_admin'&& $act !== 'logout_admin' && $act !== 'check_login_admin') checkLoginAdmin();
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 // Các Thầy.Cô có thể dùng Switch-Case
 match ($act) {
     // Trang chủ
     '/' => (new DashboardController)->dashboard(),
-    'thuong_hieu'=>(new AdminThuongHieuController())->danhSachThuongHieu(),
-    'form_them_thuong_hieu'=>(new AdminThuongHieuController())->formAddThuongHieu(),
-    'them_thuong_hieu'=>(new AdminThuongHieuController())->postAddThuongHieu(),
-    'form_sua_thuong_hieu'=>(new AdminThuongHieuController())->formEditThuongHieu(),
-    'sua_thuong_hieu'=>(new AdminThuongHieuController())->postEditThuongHieu(),
-    'xoa_thuong_hieu'=>(new AdminThuongHieuController())->deleteThuongHieu(),
+    'thuong_hieu' => (new AdminThuongHieuController())->danhSachThuongHieu(),
+    'form_them_thuong_hieu' => (new AdminThuongHieuController())->formAddThuongHieu(),
+    'them_thuong_hieu' => (new AdminThuongHieuController())->postAddThuongHieu(),
+    'form_sua_thuong_hieu' => (new AdminThuongHieuController())->formEditThuongHieu(),
+    'sua_thuong_hieu' => (new AdminThuongHieuController())->postEditThuongHieu(),
+    'xoa_thuong_hieu' => (new AdminThuongHieuController())->deleteThuongHieu(),
     // tài khoản quản trị
-    'list_tai_khoan_quan_tri'=>(new AdminTaiKhoanController())->listTaiKhoanQuanTri(),
-    'form_them_quan_tri'=>(new AdminTaiKhoanController())->formAddTaiKhoanQuanTri(),
-    'them_quan_tri'=>(new AdminTaiKhoanController())->postAddTaiKhoanQuanTri(),
-    'form_sua_quan_tri'=>(new AdminTaiKhoanController())->formEditTaiKhoanQuanTri(),
-    'sua_quan_tri'=>(new AdminTaiKhoanController())->postEditTaiKhoanQuanTri(),
-    'reset_password'=>(new AdminTaiKhoanController())->resetPassword(),
-    
+    'list_tai_khoan_quan_tri' => (new AdminTaiKhoanController())->listTaiKhoanQuanTri(),
+    'form_them_quan_tri' => (new AdminTaiKhoanController())->formAddTaiKhoanQuanTri(),
+    'them_quan_tri' => (new AdminTaiKhoanController())->postAddTaiKhoanQuanTri(),
+    'form_sua_quan_tri' => (new AdminTaiKhoanController())->formEditTaiKhoanQuanTri(),
+    'sua_quan_tri' => (new AdminTaiKhoanController())->postEditTaiKhoanQuanTri(),
+    'reset_password' => (new AdminTaiKhoanController())->resetPassword(),
+
     //route auth
-    'login_admin'=>(new AdminTaiKhoanController())->formLogin(),
-    'check_login_admin'=>(new AdminTaiKhoanController())->login(),
-    'logout_admin'=>(new AdminTaiKhoanController())->logOut(),
+    'login_admin' => (new AdminTaiKhoanController())->formLogin(),
+    'check_login_admin' => (new AdminTaiKhoanController())->login(),
+    'logout_admin' => (new AdminTaiKhoanController())->logOut(),
 
 
     //san pham 
-    'san_pham'=>(new AdminSanPhamController())->danhSachSanPham(),
-    'form_them_san_pham'=>(new AdminSanPhamController())->formAddSanPham(),
-    'them_san_pham'=>(new AdminSanPhamController())->postAddSanPham(),
-    'form_sua_san_pham'=>(new AdminSanPhamController())->formEditSanPham(),
-    'sua_san_pham'=>(new AdminSanPhamController())->postEditSanPham(),
-    'xoa_san_pham'=>(new AdminSanPhamController())->deleteSanPham(),
-    'chi_tiet_san_pham'=>(new AdminSanPhamController())->detailSanPham()
- 
+    'san_pham' => (new AdminSanPhamController())->danhSachSanPham(),
+    'form_them_san_pham' => (new AdminSanPhamController())->formAddSanPham(),
+    'them_san_pham' => (new AdminSanPhamController())->postAddSanPham(),
+    'form_sua_san_pham' => (new AdminSanPhamController())->formEditSanPham(),
+    'sua_san_pham' => (new AdminSanPhamController())->postEditSanPham(),
+    'xoa_san_pham' => (new AdminSanPhamController())->deleteSanPham(),
+    'sua_album_anh_san_pham' => (new AdminSanPhamController())->postEditAnhSanPham(),
+    'chi_tiet_san_pham' => (new AdminSanPhamController())->detailSanPham(),
+
+    //binh luan
+    'update_trang_thai_binh_luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
+    
 };

@@ -69,16 +69,16 @@ include './views/layout/navbar.php'
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Hình ảnh</label>
-                                    <input type="file" class="form-control" name="hinh_anh" >
+                                    <input type="file" class="form-control" name="hinh_anh">
                                     <?php if (isset($_SESSION['error']['hinh_anh'])) {  ?>
                                         <p class="text-danger"><?= $_SESSION['error']['hinh_anh'] ?></p>
                                     <?php } ?>
                                 </div>
-                                <!-- <div class="form-group col-6">
+                                <div class="form-group col-6">
                                     <label>Album ảnh</label>
-                                    <input type="file" class="form-control" name="img_array[]" multiple >
-                                    
-                                </div> -->
+                                    <input type="file" class="form-control" name="img_array[]" multiple>
+
+                                </div>
                                 <div class="form-group col-6">
                                     <label>Số Lượng</label>
                                     <input type="number" class="form-control" name="so_luong" placeholder="Nhập Số Lượng">
@@ -98,7 +98,7 @@ include './views/layout/navbar.php'
                                     <select class="form-control" name="thuong_hieu_id" id="exampleFormControlSelect1">
                                         <option selected disabled>chọn thương hiệu sản phẩm</option>
                                         <?php foreach ($listThuongHieu as $ThuongHieu):    ?>
-                                            <option value="<?= $ThuongHieu['id'] ?>" ><?= $ThuongHieu['ten_thuong_hieu'] ?></option>
+                                            <option value="<?= $ThuongHieu['id'] ?>"><?= $ThuongHieu['ten_thuong_hieu'] ?></option>
 
                                         <?php endforeach ?>
 
@@ -114,7 +114,7 @@ include './views/layout/navbar.php'
                                         <option selected disabled>chọn trạng thái sản phẩm</option>
                                         <option value="1">Còn bán </option>
                                         <option value="2">Dừng bán</option>
-                                        
+
 
                                     </select>
 
@@ -122,7 +122,7 @@ include './views/layout/navbar.php'
                                         <p class="text-danger"><?= $_SESSION['error']['trang_thai'] ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="form-group  col-6" >
+                                <div class="form-group  col-6">
                                     <label>Mô tả</label>
                                     <textarea name="mo_ta" id="" class="form-control" placeholder="Nhập mô tả "></textarea>
                                 </div>
@@ -132,7 +132,7 @@ include './views/layout/navbar.php'
                                 <div class=" text-center col-12">
                                     <button type="submit" class="btn btn-primary ">Submit</button>
                                     <!-- <a href="" class="btn btn-danger">Exit</a> -->
-                        
+
                                     <!-- <button   >Exit</button> -->
 
                                 </div>

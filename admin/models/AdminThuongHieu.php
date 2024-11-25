@@ -50,7 +50,7 @@ class AdminThuongHieu
             return $e->getMessage();
         }
     }
-    public function updateThuongHieu($id, $ten_thuong_hieu,$new_file, $mo_ta)
+    public function updateThuongHieu($id, $ten_thuong_hieu, $new_file, $mo_ta)
     {
         try {
             $sql = "UPDATE thuong_hieu SET ten_thuong_hieu = :ten_thuong_hieu,hinh_anh = :hinh_anh, mo_ta = :mo_ta WHERE id = :id";
@@ -84,4 +84,3 @@ class AdminThuongHieu
         }
     }
 }
-?>

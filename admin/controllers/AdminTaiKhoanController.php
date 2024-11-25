@@ -52,7 +52,7 @@ class AdminTaiKhoanController
                 $password = password_hash('Qlinh371', PASSWORD_BCRYPT);
                 //khai bao chức vụ
                 $chuc_vu_id = 1;
-                $s = $this->moldedTaiKhoan->insertTaiKhoanQuanTri($ho_ten, $email, $so_dien_thoai,$password, $chuc_vu_id);
+                $s = $this->moldedTaiKhoan->insertTaiKhoanQuanTri($ho_ten, $email, $so_dien_thoai, $password, $chuc_vu_id);
                 // var_dump($s);die();
 
                 header('location: ' . BASE_URL_ADMIN . '?act=list_tai_khoan_quan_tri');
@@ -65,7 +65,6 @@ class AdminTaiKhoanController
                 exit();
             }
         }
-
     }
     public function formEditTaiKhoanQuanTri()
     {
@@ -108,7 +107,7 @@ class AdminTaiKhoanController
             //nếu không có lỗi tiến hành thêm danh mục
             if (empty($error)) {
                 $s = $this->moldedTaiKhoan->updateTaiKhoanQuanTri(
-                    $quan_tri_id,   
+                    $quan_tri_id,
                     $ho_ten,
                     $email,
                     $so_dien_thoai,
@@ -127,7 +126,6 @@ class AdminTaiKhoanController
                 $_SESSION['flash'] = true;
                 header('location: ' . BASE_URL_ADMIN . '?act=form_sua_quan_tri&id_quan_tri=' . $quan_tri_id);
                 exit();
-
             }
         }
     }
@@ -155,7 +153,7 @@ class AdminTaiKhoanController
         deleteSessionError();
     }
     public function login()
-    { 
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -173,21 +171,14 @@ class AdminTaiKhoanController
                 header('location: ' . BASE_URL_ADMIN . '?act=login_admin');
                 exit();
             }
-
         }
-
     }
     public function logout()
     {
         if (isset($_SESSION['user_admin'])) {
             unset($_SESSION['user_admin']);
-
         }
         header('location: ' . BASE_URL_ADMIN . '?act=login_admin');
         exit();
     }
-        
-    
-   
-   
 }
