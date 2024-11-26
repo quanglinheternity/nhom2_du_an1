@@ -35,11 +35,11 @@ $act = $_GET['act'] ?? '/';
 // if($act !== 'login_admin' && $act !== 'logout_admin' && $act !== 'check_login_admin' && !isset($_SESSION['error'])) checkLoginAdmin();
 
 // Danh sách các hành động không cần kiểm tra đăng nhập
-// $allowedActions = ['login_admin', 'logout_admin', 'check_login_admin'];
+$allowedActions = ['login_admin', 'logout_admin', 'check_login_admin'];
 
-// if (!in_array($act, $allowedActions) && empty($_SESSION['error'])) {
-//     checkLoginAdmin();
-// }
+if (!in_array($act, $allowedActions) && empty($_SESSION['error'])) {
+    checkLoginAdmin();
+}
 
 
 // if($act !== 'login_admin'&& $act !== 'logout_admin' && $act !== 'check_login_admin') checkLoginAdmin();
