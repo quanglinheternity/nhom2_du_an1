@@ -79,9 +79,9 @@
                                         </li>
                                         
                                         <li>
-                                            <a href="#" class="minicart-btn">
+                                            <a href="<?php echo BASE_URL. '?act=gio_hang' ?>" class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
-                                                <div class="notification">2</div>
+                                                <!-- <div class="notification">2</div> -->
                                             </a>
                                         </li>
                                     </ul>
