@@ -3,9 +3,14 @@
 class HomeController
 {
     public $moldedSanPham;
+    public $moldedTaiKhoan;
+
 
     public function __construct() {
        $this->moldedSanPham = new sanPham();
+
+       $this->moldedTaiKhoan = new taiKhoan();
+
     }
 
     public function home() {
@@ -31,5 +36,34 @@ class HomeController
             header('location: ' . BASE_URL);
             exit();
         }
+    }
+    public function formLoginClient()
+    {
+        require_once './views/auth/formLogin.php';
+        deleteSessionError();
+    }
+    public function checkLoginClient()
+    { 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            //xử lý đăng nhận kiểm tra
+            $user = $this->moldedTaiKhoan->checkLogin($email, $password);
+            // var_dump($user);die();
+
+            if ($user == $email) {
+                $_SESSION['user_client'] = $user;
+                header('location: ' . BASE_URL);
+                exit();
+            } else {
+                $_SESSION['error'] = $user;
+                // var_dump($_SESSION['error']);die();
+                $_SESSION['flash'] = true;
+                header('location: ' . BASE_URL . '?act=login_client');
+                exit();
+            }
+
+        }
+
     }
 }

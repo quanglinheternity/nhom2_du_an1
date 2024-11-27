@@ -90,7 +90,6 @@ include './views/layout/navbar.php'
                       <td>
                         <div class="btn-group btn-group-sm">
                           <a href="<?= BASE_URL_ADMIN . '?act=chi_tiet_don_hang&id_don_hang=' . $donHang['id'] ?>" ><button class="btn btn-primary" ><i class="fas fa-eye"></i></button></a>
-                          <a href="<?= BASE_URL_ADMIN . '?act=form_sua_don_hang&id_don_hang=' . $donHang['id'] ?>"><button class="btn btn-warning"><i class="fas fa-tools"></i></button></a>
                           <?php  if($donHang['trang_thai_id']==1){?>
                           <a href="<?= BASE_URL_ADMIN . '?act=huy_don_hang&id_don_hang=' . $donHang['id'] ?>" onclick="return confirm('Bạn có chắc muốn hủy đơn hàng không?')" ><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
                           <?php } ?>
