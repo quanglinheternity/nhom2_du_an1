@@ -30,8 +30,13 @@
                                            
                                             <li><a href="# ">Thương hiệu <i class="fa fa-angle-down"></i></a>
                                                 <ul class="dropdown">   
-                                                    <li><a href="#">blog left sidebar</a></li>
-                                                   
+                                                <?php  
+                                                    $listThuongHieu=listThuongHieu();
+
+                                                foreach($listThuongHieu as $ThuongHieu): ?>
+                                                    <!-- <li><a href="#">blog left sidebar</a></li> -->
+                                                     <li><a href=""><?php echo $ThuongHieu['ten_thuong_hieu']?></a></li>
+                                                   <?php endforeach ?>
                                                 </ul>
                                             </li>
                                             <li><a href="#">Sản phẩm</a></li>
@@ -58,20 +63,22 @@
                                 <div class="header-configure-area">
                                     <ul class="nav justify-content-end">
                                     
-                                        <li class="user-hover">
+                                    <li class="user-hover">
                                             <a href="#">
                                                 <i class="pe-7s-user"></i>
                                             </a>
                                             <ul class="dropdown-list">
-                                            <li class="single-dropdown-item  " ><?php 
+                                            <li><a href="#"><?php 
                                             
                                             if (isset($_SESSION['user_client'])){ 
                                                 $name=preg_replace('/@.*/', '', $_SESSION['user_client']);
                                                 echo ucfirst($name)
-                                            ?>  
+                                            ?></a></li>
                                             <li><a href="#">tài khoản</a></li>
+                                            <li><a href="<?= BASE_URL.'?act=lich_su_mua_hang' ?>">Lịch sử mua hàng</a></li>
+                                            <li><a href="<?= BASE_URL.'?act=logout_client' ?>">Đăng xuất</a></li>
                                             <?php } else{
-                                            ?></li>
+                                            ?>
                                                 <li><a href="<?php echo BASE_URL . '?act=login_client' ?>">đăng nhập</a></li>
                                                 <li><a href="login-register.html">đăng ký</a></li>
                                                 <?php } ?>
@@ -80,7 +87,15 @@
                                         
                                         <li>
                                             <a href="<?php echo BASE_URL. '?act=gio_hang' ?>" class="minicart-btn">
-                                                <i class="pe-7s-shopbag"></i>
+                                                <!-- <i class="pe-7s-shopbag"></i> -->
+                                                <i class="fa fa-shopping-bag"></i>
+
+                                                 <!-- <i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                                                </svg>
+                                                </i> -->
+                                                <!-- <i class="bi bi-cart3"></i> -->
                                                 <!-- <div class="notification">2</div> -->
                                             </a>
                                         </li>

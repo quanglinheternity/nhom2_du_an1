@@ -162,6 +162,8 @@ require_once './views/layout/header.php';
                                                             </div>
                                                         </div>
                                                     <?php endif; ?>
+                                            <?php endforeach; ?>
+
                                                     <div class="form-group row">
                                                         <div class="col">
                                                             <label class="col-form-label"><span class="text-danger">*</span>
@@ -181,7 +183,6 @@ require_once './views/layout/header.php';
                                                 </div>
 
 
-                                            <?php endforeach; ?>
                                     </div>
                                 </div>
                             </div>
