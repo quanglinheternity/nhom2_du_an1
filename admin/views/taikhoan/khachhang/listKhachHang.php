@@ -27,7 +27,7 @@ include './views/layout/navbar.php'
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Quản lý Tài khoản quản trị viên</h1>
+                    <h1>Quản lý Tài khoản khách hàng</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -47,11 +47,6 @@ include './views/layout/navbar.php'
                     <!-- /.card -->
 
                     <div class="card">
-                        <div class="card-header">
-                            <a href="<?= BASE_URL_ADMIN . '?act=form_them_quan_tri' ?>">
-                                <button type="button" class="btn btn-primary">Thêm tài khoản</button>
-                            </a>
-                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -59,6 +54,7 @@ include './views/layout/navbar.php'
                                     <tr>
                                         <th>STT</th>
                                         <th>Họ và tên</th>
+                                        <th>Ảnh đại điện</th>
                                         <th>Email</th>
                                         <th>Số điện thoại</th>
                                         <th>Trang thái</th>
@@ -68,21 +64,27 @@ include './views/layout/navbar.php'
                                 </thead>
                                 <tbody>
                                     <?php
-                                    foreach ($listQuanTri as $key => $quanTri) {
+                                    foreach ($listKhachHang as $key => $khachHang) {
                                         ?>
                                         <tr>
                                             <td><?= $key + 1 ?></td>
-                                            <td><?= $quanTri['ho_ten'] ?></td>
-                                            <td><?= $quanTri['email'] ?></td>
-                                            <td><?= $quanTri['so_dien_thoai'] ?></td>
-                                            <td><?= $quanTri['trang_thai'] == 1 ? 'Active' : 'Inactive' ?></td>
+                                            <td><?= $khachHang['ho_ten'] ?></td>
                                             <td>
-                                                <a
-                                                    href="<?= BASE_URL_ADMIN . '?act=form_sua_quan_tri&id_quan_tri=' . $quanTri['id'] ?>"><button
-                                                        class="btn btn-warning">Sửa</button></a>
-                                                <a href="<?= BASE_URL_ADMIN . '?act=reset_password&id_quan_tri=' . $quanTri['id'] ?>"
-                                                    onclick="return confirm('Bạn có muốn đặt lại mật khẩu là: Qlinh371 không?')"><button
-                                                        class="btn btn-danger">Reset</button></a>
+                                                <img src="<?=BASE_URL . $khachHang['anh_dai_dien'] ?>" style="max-width: 120px; max-height: 100px" alt="" onerror="this.onerror=null;this.src='https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg';">
+                                            </td>
+                                            <td><?= $khachHang['email'] ?></td>
+                                            <td><?= $khachHang['so_dien_thoai'] ?></td>
+                                            <td><?= $khachHang['trang_thai'] == 1 ? 'Active' : 'Inactive' ?></td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a
+                                                        href="<?= BASE_URL_ADMIN . '?act=chi_tiet_khach_hang&id_khach_hang=' . $khachHang['id'] ?>"><button
+                                                            class="btn btn-primary"><i class="fas fa-eye"></i></button></a>
+                                                    <a
+                                                        href="<?= BASE_URL_ADMIN . '?act=form_sua_khach_hang&id_khach_hang=' . $khachHang['id'] ?>"><button
+                                                            class="btn btn-warning"><i class="fas fa-tools"></i></button></a>
+                                                </div>
+                                               
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -93,6 +95,7 @@ include './views/layout/navbar.php'
                                     <tr>
                                         <th>STT</th>
                                         <th>Họ và tên</th>
+                                        <th>Ảnh đại điện</th>
                                         <th>Email</th>
                                         <th>Số điện thoại</th>
                                         <th>Trang thái</th>
