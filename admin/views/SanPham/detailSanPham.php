@@ -86,15 +86,17 @@
 
                                         <td><?= $BinhLuan['noi_dung'] ?></td>
                                         <td><?= $BinhLuan['ngay_dang'] ?></td>
-                                        <td><?= $BinhLuan['trang_thai'] == 1 ? 'Hiển thị' : 'Bị Ẩn' ?></td>
+                                        <td>
+                                            <span class="text-<?= $BinhLuan['trang_thai'] == 2 ? 'danger' : 'success' ?>"><?= $BinhLuan['trang_thai'] == 1 ? 'Hiển thị' : 'Bị ẩn' ?></span>
+                                        </td>
                                         <td>
                                             <div class="btn-group ">
                                                 <form action="<?= BASE_URL_ADMIN . '?act=update_trang_thai_binh_luan' ?>" method="POST">
                                                     <input type="hidden" name="id_binh_luan" value="<?= $BinhLuan['id'] ?>">
                                                     <input type="hidden" name="name_view" value="detail_sanpham">
                                                     <input type="hidden" name="id_khach_hang" value="<?= $BinhLuan['tai_khoan_id'] ?>">
-                                                    <button onclick="return confirm('Bạn có muốn ẩn bình luận này không?')" class="btn btn-warning">
-                                                        <?= $BinhLuan['trang_thai'] == 1 ? "Ẩn" : "Bỏ ẩn" ?>
+                                                    <button onclick="return confirm('Bạn có muốn <?= $BinhLuan['trang_thai'] == 1 ? 'Ẩn' : 'hiển thị' ?> bình luận này không?')" class="btn btn-<?= $BinhLuan['trang_thai'] == 1 ? 'danger' : 'success' ?>">
+                                                        <?= $BinhLuan['trang_thai'] == 1 ? "Ẩn bỏ" : "hiển thị" ?>
                                                     </button>
                                                 </form>
                                             </div>

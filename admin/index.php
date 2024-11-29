@@ -98,5 +98,10 @@ match ($act) {
 
     //binh luan
     'update_trang_thai_binh_luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
+    //quản lý tài khoản khách hàng
+    'list_tai_khoan_khach_hang'=>(new AdminTaiKhoanController())->listKhachHang(),
+    'form_sua_khach_hang'=>(new AdminTaiKhoanController())->formEditKhachHang(),
+    'sua_khach_hang'=>(new AdminTaiKhoanController())->postEditKhachHang(),
+    'chi_tiet_khach_hang'=>(new AdminTaiKhoanController())->chiTietKhachHang(),
     
 };

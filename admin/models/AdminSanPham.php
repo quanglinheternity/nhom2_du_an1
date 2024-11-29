@@ -284,8 +284,29 @@ class AdminSanPham
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $id]);
             return $stmt->fetchAll();
+            // var_dump($stmt->fetchAll()); die();
         } catch (Exception $e) {
             echo "loi" . $e->getMessage();
+        }
+    }
+    public function getBinhLuanByIdKhachHang($id)
+    {
+        try {
+            $sql = "SELECT binh_luans.*, san_phams.ten_san_pham
+            FROM binh_luans
+            INNER JOIN san_phams ON binh_luans.san_pham_id = san_phams.id
+            where binh_luans.tai_khoan_id = :id
+            ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(
+                [
+                    ':id' => $id
+                ]
+            );
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            return $e->getMessage();
         }
     }
 }
