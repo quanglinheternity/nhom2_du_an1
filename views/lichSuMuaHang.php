@@ -47,13 +47,16 @@
                                     </thead>
                                 
                                     <tbody>
+                                        <?php usort($donHang, function($a, $b) {
+                                            return $a['trang_thai_id'] <=> $b['trang_thai_id'];
+                                        });?>
                                         <?php foreach($donHang as $don): ?>
                                             <tr>
                                                 <th class="text-center"><?= $don['ma_don_hang'] ?></th>
                                                 <td><?= $don['ngay_dat'] ?></td>
                                                 <td><?= formatPrice($don['tong_tien'] )?> đ</td>
-                                                <td><?=$phuongThucThanhToan[ $don['phuong_thuc_thanh_toan_id'] ]?></td>
-                                                <td><?= $trangThaiDonHang[$don['trang_thai_id']] ?></td>
+                                                <td ><?=$phuongThucThanhToan[ $don['phuong_thuc_thanh_toan_id'] ]?></td>
+                                                <td class="text-<?= getStatusClass($don['trang_thai_id']) ?>"><?= $trangThaiDonHang[$don['trang_thai_id']] ?></td>
                                                 <td>
                                                     <a href="<?= BASE_URL . '?act=chi_tiet_mua_hang&id_don_hang=' . $don['id'] ?>"><button class="btn btn-sqr">Chi tiết</button></a>
                                                     <?php 

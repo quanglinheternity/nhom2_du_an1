@@ -19,7 +19,6 @@ require_once "./models/DonHang.php";
 $act = $_GET['act'] ?? '/';
 
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
-
 match ($act) {
     // Trang chủ
     '/' => (new HomeController())->home(),
@@ -33,4 +32,5 @@ match ($act) {
     'huy_don_hang' => (new HomeController())->huyDonHang(),
     'login_client' => (new HomeController())->formLoginClient(),
     'check_login_client' => (new HomeController())->checkLoginClient(),
+    'logout_client'=> (new HomeController())->logout(),
 };

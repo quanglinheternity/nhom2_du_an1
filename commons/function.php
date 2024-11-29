@@ -151,3 +151,9 @@ function getStatusClassSau($trang_thai_id) {
             return 'dark'; // Mặc định
     }
 }
+function listThuongHieu() {
+    $listThuongHieu = (new sanPham())->getAllThuongHieu();
+    // require_once './views/layout/menu.php';
+    return $listThuongHieu;
+
+}

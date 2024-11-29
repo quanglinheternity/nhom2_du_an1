@@ -16,13 +16,14 @@ class HomeController
     }
 
     public function home() {
-       $listSanPham = $this->moldedSanPham->getAllSanPham();
-        $listThuongHieu = $this->moldedSanPham->getAllThuongHieu();
+        $listSanPham = $this->moldedSanPham->getAllSanPham();
+        // $listThuongHieu = $this->moldedSanPham->getAllThuongHieu();
         $listBinhLuan = $this->moldedSanPham->getAllBinhLuanFormKhachHang();
         require_once './views/home.php';
     }
     public function chiTietSanPham() {
         $id = $_GET['id_san_pham'];
+        // $listThuongHieu = $this->moldedSanPham->getAllThuongHieu();
         $sanPham = $this->moldedSanPham->getSanPhamById($id);
         $listBinhLuan = $this->moldedSanPham->getBinhLuanByFormSanPham($id);
         $sizeSanPham = $this->moldedSanPham->getSizeSanPham();
@@ -67,6 +68,15 @@ class HomeController
 
         }
 
+    }
+    public function logout()
+    {
+        if (isset($_SESSION['user_client'])) {
+            unset($_SESSION['user_client']);
+            unset($_SESSION['error']);
+        }
+        header('location: ' . BASE_URL );
+        exit();
     }
     public function addGioHang(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
