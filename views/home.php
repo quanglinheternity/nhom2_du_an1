@@ -207,7 +207,7 @@
                                                      </div>
                                                
                                                 <div class="cart-hover">
-                                                    <button class="btn btn-cart">Xem chi tiết</button>
+                                                    <button class="btn_xem_chi_tiet btn btn-cart">Xem chi tiết</button>
                                                 </div>
                                             </figure>
                                             <div class="product-caption text-center">
