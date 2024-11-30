@@ -302,4 +302,35 @@ class HomeController
       exit();
     }
   }
-}
+
+      // Phương thức xử lý cập nhật giỏ hàng
+      public function   updateCart() {
+          // Lấy dữ liệu từ yêu cầu POST (gửi từ AJAX)
+          $productId = $_POST['product_id'] ?? null; // ID của sản phẩm
+          $quantity = $_POST['quantity'] ?? 0;       // Số lượng sản phẩm mới
+  
+          // Kiểm tra xem ID sản phẩm và số lượng có hợp lệ không
+          if ($productId && $quantity > 0) {
+              // Giả sử giỏ hàng của người dùng được lưu trong một session hoặc cơ sở dữ liệu
+              // Ví dụ: lấy giỏ hàng từ session
+              // Kiểm tra giỏ hàng trong session
+
+
+                  // Nếu có cơ sở dữ liệu, bạn có thể cập nhật ở đây
+                  // Ví dụ: cập nhật số lượng sản phẩm trong bảng giỏ hàng của người dùng
+                 $s= $this->moldedGioHang->updateCartInDatabase($productId, $quantity);
+  // var_dump($s);die();
+                  echo json_encode(['status' => 'success', 'message' => 'Giỏ hàng đã được cập nhật!']);
+             
+          } else {
+              echo json_encode(['status' => 'error', 'message' => 'Dữ liệu không hợp lệ.']);
+          }
+      }
+  
+        public function deleteSp(){
+          $productId = $_POST['product_id'] ?? null; // ID của sản phẩm
+          $this->moldedGioHang->deleteSpInCart($productId);
+      }
+      
+  }
+  

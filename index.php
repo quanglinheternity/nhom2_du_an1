@@ -33,4 +33,7 @@ match ($act) {
     'login_client' => (new HomeController())->formLoginClient(),
     'check_login_client' => (new HomeController())->checkLoginClient(),
     'logout_client'=> (new HomeController())->logout(),
+    'update_cart'=> (new HomeController())->updateCart(),
+    'delete_cart'=> (new HomeController())->deleteSp(),
+    default => throw new Exception("Unhandled match case '$act'"),
 };
