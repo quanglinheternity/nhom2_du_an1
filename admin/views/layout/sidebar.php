@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
+    <a href="<?php echo BASE_URL_ADMIN ?>" class="brand-link">
       <img src="./assets/dist/img/download.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" >
       <span >Trang ADMIN</span>
     </a>
@@ -149,7 +149,8 @@
 .user-panel {
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding-top: 15px;
+    padding-right: 5px;
     background-color: #374151;
     margin-bottom: 15px;
     border-radius: 5px;
