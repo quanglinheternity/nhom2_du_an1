@@ -35,7 +35,7 @@
                                 <h3 class="login-title text-center">Đăng nhập</h3>
                                 <div class="card-body">
                                 <?php if(isset($_SESSION['error']) ){  ?>
-                                            <p class="text-danger text-center"><?= $_SESSION['error'] ?></p>
+                                            <p class="text-danger text-center"><?=$_SESSION['error'];unset($_SESSION['error']) ?></p>
                                         <?php }else { ?>
                                             <p class="login-box-msg text-center">Vui lòng đăng nhập tài khoản của bạn</p>
                                             <?php

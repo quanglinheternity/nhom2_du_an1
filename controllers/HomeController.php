@@ -6,6 +6,7 @@ class HomeController
     public $moldedTaiKhoan;
     public $moldedGioHang;
     public $moldedDonHang;
+    public $authController;
 
     public function __construct() {
        $this->moldedSanPham = new sanPham();
@@ -13,6 +14,7 @@ class HomeController
        $this->moldedTaiKhoan = new taiKhoan();
        $this->moldedGioHang = new GioHang();
        $this->moldedDonHang = new donHang();
+       $this->authController = new AuthController();
     }
 
     public function home() {
@@ -302,4 +304,44 @@ class HomeController
       exit();
     }
   }
+  public function formRegister()
+    {
+        require_once 'views/auth/formRegister.php';
+        deletesessionError();
+    }
+    public function postRegister()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $fullname = $_POST['ho_ten'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $confirmPassword = $_POST['confirm_password'];
+            $errors = [];
+
+
+            if (empty($fullname)) {
+                $errors[] = 'Vui lòng nhập tên';
+            }
+            if (empty($email)) {
+                $errors[] = 'Vui lòng nhập email.';
+            }
+
+            if ($password !== $confirmPassword) {
+                $_SESSION['error'] = "Mật khẩu và xác nhận mật khẩu không khớp";
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL . '?act=register');
+                exit();
+            }
+            $result = $this->authController->register($fullname, $email, $password);
+            if ($result === "Đăng ký thành công") {
+                $_SESSION['success'] = $result;
+                header("Location: " . BASE_URL . '?act=login_client');
+                exit();
+            } else {
+                $_SESSION['error'] = $result;
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL . '?act=register');
+            }
+        }
+    }
 }

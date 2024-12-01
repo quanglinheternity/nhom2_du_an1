@@ -7,6 +7,8 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
 require_once "./controllers/HomeController.php";
+require_once "./controllers/authController.php";
+
 
 
 // Require toàn bộ file Models
@@ -33,4 +35,6 @@ match ($act) {
     'login_client' => (new HomeController())->formLoginClient(),
     'check_login_client' => (new HomeController())->checkLoginClient(),
     'logout_client'=> (new HomeController())->logout(),
+    'register' => (new HomeController())->formRegister(),
+    'post_register' => (new HomeController())->postRegister()
 };
