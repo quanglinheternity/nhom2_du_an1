@@ -30,7 +30,6 @@ class HomeController
         // var_dump($sizeSanPham);die();
         $listAnhSanPham = $this->moldedSanPham->getlistAnhSanPhamById($id);
         $listSanPhamCungThuongHieu=$this->moldedSanPham->getListSanPhamThuongHieu($sanPham['thuong_hieu_id']);
-        
         // var_dump($listSanPhamCungThuongHieu);die();
         if ($sanPham) {
             require_once './views/detailSanPham.php';
@@ -132,15 +131,22 @@ class HomeController
               $mail=$this->moldedTaiKhoan->getTaiKhoanFormEmail($_SESSION['user_client']);
             //   var_dump($mail['id']);
               $gioHang = $this->moldedGioHang->getGioHangFormId($mail['id']);
-            //   var_dump($gioHang);die();
+              $maGiam=null;
+              if(isset($_POST['ma'])){
+                $maGiam=(new HomeController())->getMaGiamGia();
+                // var_dump($maGiam);die();
+              }
+              
               if(!$gioHang){
                   $gioHangId =$this->moldedGioHang->addGioHang($mail['id']);
                   $gioHang =['id'=>$gioHangId];
+                  //  var_dump(value: $maGiamGia);die();
                   $chiTietGioHang = $this->moldedGioHang->getDetailGioHang($gioHang['id']);
+                  
               }else{
                     $chiTietGioHang = $this->moldedGioHang->getDetailGioHang($gioHang['id']);
               }
-            //   var_dump($chiTietGioHang); die();
+              // var_dump($maGiam); die();
               require_once './views/gioHang.php';
 
             }else{
@@ -151,6 +157,11 @@ class HomeController
         }
     public function thanhToan(){
       if (isset($_SESSION['user_client'])) {
+        $giaGiam=$_GET['ma_id'] ?? 0;
+        // if(isset($ma)){
+        //   $MaGiam=$this->moldedSanPham->getMaGiamGiaByMa($ma);
+
+        // }
         $user=$this->moldedTaiKhoan->getTaiKhoanFormEmail($_SESSION['user_client']);
       //   var_dump($mail['id']);
         $gioHang = $this->moldedGioHang->getGioHangFormId($user['id']);
@@ -160,7 +171,7 @@ class HomeController
             $gioHang =['id'=>$gioHangId];
             $chiTietGioHang = $this->moldedGioHang->getDetailGioHang($gioHang['id']);
         }else{
-              $chiTietGioHang = $this->moldedGioHang->getDetailGioHang($gioHang['id']);
+            $chiTietGioHang = $this->moldedGioHang->getDetailGioHang($gioHang['id']);
         }
       //   var_dump($chiTietGioHang); die();
       require_once './views/thanhToan.php';
@@ -310,7 +321,7 @@ class HomeController
           $quantity = $_POST['quantity'] ?? 0;       // Số lượng sản phẩm mới
   
           // Kiểm tra xem ID sản phẩm và số lượng có hợp lệ không
-          if ($productId && $quantity > 0) {
+          if ($productId>0 && $quantity >= 0) {
               // Giả sử giỏ hàng của người dùng được lưu trong một session hoặc cơ sở dữ liệu
               // Ví dụ: lấy giỏ hàng từ session
               // Kiểm tra giỏ hàng trong session
@@ -330,6 +341,15 @@ class HomeController
         public function deleteSp(){
           $productId = $_POST['product_id'] ?? null; // ID của sản phẩm
           $this->moldedGioHang->deleteSpInCart($productId);
+      }
+      public function getMaGiamGia(){
+        $ma=$_POST['ma'] ;
+        // var_dump($ma);
+        $MaGiam=$this->moldedSanPham->getMaGiamGiaByMa($ma);
+        // var_dump($MaGiam);die();
+        // require_once "./views/detailSanPham.php";
+        return $MaGiam;
+        // require_once "./views/detailSanPham.php";
       }
       
   }

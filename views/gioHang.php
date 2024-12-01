@@ -89,9 +89,9 @@
                             <!-- Cart Update Option -->
                             <div class="cart-update-option d-block d-md-flex justify-content-between">
                                 <div class="apply-coupon-wrapper">
-                                    <form action="#" method="post" class=" d-block d-md-flex"> 
-                                        <input type="text" placeholder="Enter Your Coupon Code" required />
-                                        <button class="btn btn-sqr">Áp dụng mã</button>
+                                    <form action="<?= BASE_URL .'?act=ma_giam_gia' ?>" method="post" class=" d-block d-md-flex"> 
+                                        <input type="text" placeholder="Enter Your Coupon Code" required name="ma" />
+                                        <button class="btn_ap_dung_ma btn btn-sqr">Áp dụng mã</button>
                                      </form>
                                 </div>
                                 <div class="cart-update">
@@ -106,25 +106,43 @@
                             <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">
                                 <div class="cart-calculate-items">
-                                    <h6>Cart Totals</h6>
+                                    <h6>Giỏ hàng tổng</h6>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
                                                 <td>Tổng tiền sản phẩm</td>
-                                                <td><?php echo formatPrice($tong_thanh_toan)."đ" ?></td>
+                                                <td id="tong_tien_san_pham"><?php echo formatPrice($tong_thanh_toan)." đ" ?></td>
+                                            </tr>
+                                            <?php if(isset($maGiam)){
+                                                $maGiamGia=$maGiam[0]['gia_tri_giam'] ?? 0;    
+                                            ?>
+                                            <tr>
+                                                <td>Giảm giá</td>
+                                                <td><?= formatPrice($maGiamGia). ' đ' ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Phí vận chuyển</td>
-                                                <td>30.000 đ</td>
+                                                <td id="phi_van_chuyen">30.000 đ</td>
                                             </tr>
                                             <tr class="total">
                                                 <td>Tổng thanh toán</td>
-                                                <td class="total-amount"><?php echo formatPrice($tong_thanh_toan + 30000)."đ" ?></td>
+                                                <td class="total-amount" id="tong_thanh_toan"><?php echo formatPrice($tong_thanh_toan + 30000 - $maGiamGia)." đ" ?></td>
                                             </tr>
+                                            <?php }else{?>
+                                            <tr>
+                                                <td>Phí vận chuyển</td>
+                                                <td id="phi_van_chuyen">30.000 đ</td>
+                                            </tr>
+                                            <tr class="total">
+                                                <td>Tổng thanh toán</td>
+                                                <td class="total-amount" id="tong_thanh_toan"><?php echo formatPrice($tong_thanh_toan + 30000 )." đ" ?></td>
+                                            </tr>
+                                            <?php } ?>
                                         </table>
                                     </div>
                                 </div>
-                                <a href="<?= BASE_URL . '?act=thanh_toan' ?>" class="btn btn-sqr d-block">Thanh toán</a>
+                                <a href="<?= BASE_URL . '?act=thanh_toan' ?><?= isset($maGiam) ? '&ma_id=' . ($maGiam[0]['gia_tri_giam'] ?? '') : '' ?>" class="btn btn-sqr d-block">Thanh toán</a>
+
                             </div>
                         </div>
                     </div>
@@ -142,7 +160,7 @@
    <?php require_once './views/layout/footer.php';?>
    <script>
        
-       jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {
     $(".xoa_sp_cart").click(function(e){
         e.preventDefault();
         var tr = $(this).parent();
@@ -171,6 +189,10 @@
             input.val(currentValue ); // Trừ 1 vào giá trị hiện tại
             updateTotalPrice(input); // Cập nhật lại giá trị "thành tiền"
             updateCart(input); // Gửi cập nhật đến server
+        }else{
+            var tr = input.closest('tr');
+            var productId = tr.data('id');
+            deleteSp(productId);
         }
     });
 
@@ -179,11 +201,11 @@
         var inputValue = parseInt($(this).val()) || 0;
 
         // Prevent negative values
-        if (inputValue < 0) {
+        if (inputValue <= 0) {
             $(this).val(0);
             inputValue = 0; // Update inputValue to reflect the reset
+           
         }
-
         updateTotalPrice($(this)); // Cập nhật giá trị "thành tiền" khi thay đổi số lượng
         updateCart($(this)); // Gửi cập nhật đến server
     });
@@ -241,5 +263,6 @@
         return price.toLocaleString('vi-VN') + 'đ';
     }
 });
+
 
    </script>

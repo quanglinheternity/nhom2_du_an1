@@ -76,11 +76,11 @@
                                             ?></a></li>
                                             <li><a href="#">tài khoản</a></li>
                                             <li><a href="<?= BASE_URL.'?act=lich_su_mua_hang' ?>">Lịch sử mua hàng</a></li>
-                                            <li><a href="<?= BASE_URL.'?act=logout_client' ?>">Đăng xuất</a></li>
+                                            <li><a href="<?= BASE_URL.'?act=logout_client' ?>"onclick="return confirm('Bạn có muốn đăng xuất?')" role="button">Đăng xuất</a></li>
                                             <?php } else{
                                             ?>
                                                 <li><a href="<?php echo BASE_URL . '?act=login_client' ?>">đăng nhập</a></li>
-                                                <li><a href="login-register.html">đăng ký</a></li>
+                                                <li><a href="login-register.html" >đăng ký</a></li>
                                                 <?php } ?>
                                             </ul>
                                         </li>

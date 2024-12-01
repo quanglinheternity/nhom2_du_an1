@@ -116,9 +116,15 @@
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td>Khuyến mãi</td>
+                                                <td class="d-flex justify-content-center">
+                                                    <strong><?= formatPrice($giaGiam). " đ"  ?></strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>Tổng thanh toán</td>`
                                                 <input type="hidden" name="tong_thanh_toan" value="<?= $tong_thanh_toan+30000 ?>">
-                                                <td><strong><?= formatPrice($tong_thanh_toan+30000). ' đ' ?></strong></td>
+                                                <td><strong><?= formatPrice($tong_thanh_toan+30000- $giaGiam). ' đ' ?></strong></td>
                                             </tr>
                                         </tfoot>
                                     </table>

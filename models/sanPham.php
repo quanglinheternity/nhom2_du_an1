@@ -125,5 +125,19 @@ class sanPham {
             echo "lỗi".$e -> getMessage();
         }
     }
+    public function getMaGiamGiaByMa($ma){
+        try {
+            $sql = "SELECT * FROM ma_giam_gia 
+            WHERE ma=:ma";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':ma'=> $ma
+            ]);
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }
 ?>
