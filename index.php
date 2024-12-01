@@ -35,5 +35,7 @@ match ($act) {
     'logout_client'=> (new HomeController())->logout(),
     'update_cart'=> (new HomeController())->updateCart(),
     'delete_cart'=> (new HomeController())->deleteSp(),
+    //mã giảm giá
+    'ma_giam_gia'=> (new HomeController())->gioHang(),
     default => throw new Exception("Unhandled match case '$act'"),
 };

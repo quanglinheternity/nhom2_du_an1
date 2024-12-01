@@ -161,7 +161,7 @@ require_once './views/layout/header.php';
                                                                 <p><?= $binhLuan['noi_dung'] ?></p>
                                                             </div>
                                                         </div>
-                                                    <?php endif; ?>
+                                                <?php endif; ?>
                                             <?php endforeach; ?>
 
                                                     <div class="form-group row">
