@@ -76,7 +76,7 @@
                                             ?></a></li>
                                             <li><a href="#">tài khoản</a></li>
                                             <li><a href="<?= BASE_URL.'?act=lich_su_mua_hang' ?>">Lịch sử mua hàng</a></li>
-                                            <li><a href="<?= BASE_URL.'?act=logout_client' ?>">Đăng xuất</a></li>
+                                            <li><a href="<?= BASE_URL.'?act=logout_client' ?>"onclick="return confirm('Bạn có muốn đăng xuất?')" role="button">Đăng xuất</a></li>
                                             <?php } else{
                                             ?>
                                                 <li><a href="<?php echo BASE_URL . '?act=login_client' ?>">đăng nhập</a></li>
@@ -85,7 +85,7 @@
                                             </ul>
                                         </li>
                                         
-                                        <li>
+                                        <li >
                                             <a href="<?php echo BASE_URL. '?act=gio_hang' ?>" class="minicart-btn">
                                                 <!-- <i class="pe-7s-shopbag"></i> -->
                                                 <i class="fa fa-shopping-bag"></i>
@@ -96,7 +96,7 @@
                                                 </svg>
                                                 </i> -->
                                                 <!-- <i class="bi bi-cart3"></i> -->
-                                                <!-- <div class="notification">2</div> -->
+                                                <div class="notification">2</div>
                                             </a>
                                         </li>
                                     </ul>
@@ -114,3 +114,26 @@
 
     </header>
     <!-- end Header Area -->
+<style>
+    .cart_ani{
+        animation-name: myani;
+        animation-duration: 0.5s ;
+    }
+    @keyframes myani{
+        0%{
+            transform: scale(1);
+        }
+        25%{
+            transform: scale(1.2);
+        }
+        50%{
+            transform: scale(1);
+        }
+        75%{
+            transform: scale(1.2);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
+</style>

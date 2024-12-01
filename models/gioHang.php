@@ -106,4 +106,29 @@ class GioHang {
         }
        
     }
+    public function updateCartInDatabase($productId, $quantity) {
+        try {
+            $sql = "UPDATE chi_tiet_gio_hangs SET so_luong = :quantity WHERE id = :productId";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':productId' => $productId,
+                ':quantity' => $quantity
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function deleteSpInCart($productId) {
+        try {
+            $sql = "DELETE FROM chi_tiet_gio_hangs WHERE id = :productId";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':productId' => $productId
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }

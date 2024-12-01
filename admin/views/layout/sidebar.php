@@ -41,8 +41,7 @@
           <li class="nav-item">
             <a href="<?= BASE_URL_ADMIN . '?act=thuong_hieu' ?>" class="nav-link">
               <!-- <i class="nav-icon fas fa-th"></i> -->
-              <i class="nav-icon fas fa-building"></i>
-
+              <i class="fab fa-shopify"></i>
 
               <p>
                 Thương hiệu sản phẩm
@@ -52,7 +51,8 @@
           </li>
           <li class="nav-item">
             <a href="<?= BASE_URL_ADMIN . '?act=san_pham' ?>" class="nav-link">
-            <i class="nav-icon fas fa-tags"></i>
+            <!-- <i class="nav-icon fas fa-tags"></i> -->
+            <i class="fas fa-box"></i>
 
               <p>
                 Sản phẩm
@@ -62,9 +62,18 @@
           </li>
           <li class="nav-item">
             <a href="<?= BASE_URL_ADMIN . '?act=don_hang' ?>" class="nav-link">
-            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <i class="fas fa-check-circle"></i>
               <p>
                 Đơn hàng
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= BASE_URL_ADMIN . '?act=list_ma_giam_gia' ?>" class="nav-link">
+            <i class="fas fa-tags"></i>
+              <p>
+                Mã giảm giá
                 <!-- <span class="right badge badge-danger">New</span> -->
               </p>
             </a>

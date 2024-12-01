@@ -7,7 +7,6 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
 require_once "./controllers/HomeController.php";
-require_once "./controllers/authController.php";
 
 
 
@@ -16,6 +15,7 @@ require_once "./models/SanPham.php";
 require_once "./models/taiKhoan.php";
 require_once "./models/GioHang.php";
 require_once "./models/DonHang.php";
+require_once "./models/authController.php";
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -35,6 +35,10 @@ match ($act) {
     'login_client' => (new HomeController())->formLoginClient(),
     'check_login_client' => (new HomeController())->checkLoginClient(),
     'logout_client'=> (new HomeController())->logout(),
+    'update_cart'=> (new HomeController())->updateCart(),
+    'delete_cart'=> (new HomeController())->deleteSp(),
+    //mã giảm giá
+    'ma_giam_gia'=> (new HomeController())->gioHang(),
     'register' => (new HomeController())->formRegister(),
     'post_register' => (new HomeController())->postRegister()
 };
