@@ -394,4 +394,24 @@ class HomeController
       }
     }
   }
+  public function themBinhLuan(){
+    // var_dump($_POST);
+    if (isset($_SESSION['user_client'])) {
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $san_pham_id = $_POST['san_pham_id'];
+        $noi_dung = $_POST['binh_luan'];
+        $user = $this->moldedTaiKhoan->getTaiKhoanFormEmail($_SESSION['user_client']);
+        $tai_khoan_id = $user['id'];
+        $ngay_dang = date('Y-m-d H:i:s');
+
+        $s=$this->moldedSanPham->themBinhLuan($san_pham_id, $noi_dung, $tai_khoan_id, $ngay_dang);
+        // var_dump($s);die();
+        Header('Location:' . BASE_URL . '?act=chi_tiet_san_pham&id_san_pham=' . $san_pham_id);
+        exit();
+      }
+    } else {
+      header('location:' . BASE_URL . '?act=login_client');
+      exit();
+    }
+  }
 }

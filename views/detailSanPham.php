@@ -148,27 +148,29 @@ require_once './views/layout/header.php';
 
 
                                                 <div class="tab-pane fade show active" id="tab_three">
-                                                    <form action="#" class="review-form">
+                                                    
                                                         <div class="total-reviews">
                                                             <div class="rev-avatar">
-                                                                <img src="<?= $binhLuan["anh_dai_dien"] ?>" alt="">
+                                                                <img src="<?= $binhLuan["anh_dai_dien"] ?> " alt=""onerror="this.onerror=null;this.src='https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg';">
                                                             </div>
                                                             <div class="review-box">
 
                                                                 <div class="post-author">
-                                                                    <p><span><?= $binhLuan['ho_ten'] ?> -</span><?= $binhLuan['ngay_dang'] ?></p>
+                                                                    <p><span><?= $binhLuan['ho_ten'] ?> -</span><?= formatDate($binhLuan['ngay_dang']) ?></p>
                                                                 </div>
                                                                 <p><?= $binhLuan['noi_dung'] ?></p>
                                                             </div>
                                                         </div>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
-
+                                                    <form action="<?= BASE_URL . '?act=them_binh_luan' ?>" method="POST" class="review-form">
                                                     <div class="form-group row">
                                                         <div class="col">
+                                                            <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                                            <input type="hidden" name="tai_khoan" value="<?=$_SESSION['user_client']?>">
                                                             <label class="col-form-label"><span class="text-danger">*</span>
                                                                 Nội dung bình luận</label>
-                                                            <textarea class="form-control" required></textarea>
+                                                            <textarea class="form-control" required name="binh_luan"></textarea>
                                                             <div class="help-block pt-10"><span
                                                                     class="text-danger">Lưu ý:</span>
                                                                 Chúng tôi rất trân trọng ý kiến của bạn để cải thiện dịch vụ. Vui lòng cung cấp thông tin cụ thể và chi tiết về trải nghiệm mua hàng của bạn.

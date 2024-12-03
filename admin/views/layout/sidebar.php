@@ -11,7 +11,7 @@
     <?php  $listTaiKhoan = (new AdminTaiKhoanController)-> getTaiKhoanByIdFormLayout(); ?>
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-        <img src="<?=BASE_URL_ADMIN . $listTaiKhoan['anh_dai_dien'] ?>" class="img-circle elevation-2" alt="User Image" onerror="this.onerror=null;this.src='https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg';">
+        <img src="<?=BASE_URL . $listTaiKhoan['anh_dai_dien'] ?>" class="img-circle elevation-2" alt="User Image" onerror="this.onerror=null;this.src='https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg';">
           <!-- <img src="./assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
         </div>
         <div class="info">

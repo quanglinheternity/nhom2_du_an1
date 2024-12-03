@@ -40,5 +40,6 @@ match ($act) {
     //mã giảm giá
     'ma_giam_gia'=> (new HomeController())->gioHang(),
     'register' => (new HomeController())->formRegister(),
-    'post_register' => (new HomeController())->postRegister()
+    'post_register' => (new HomeController())->postRegister(),
+    'them_binh_luan'=> (new HomeController())->themBinhLuan(),
 };

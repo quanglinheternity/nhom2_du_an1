@@ -139,5 +139,19 @@ class sanPham {
             return $e->getMessage();
         }
     }
+    public function themBinhLuan($san_pham_id, $noi_dung, $tai_khoan_id, $ngay_dang) {
+        try {
+            $sql = "INSERT INTO binh_luans (san_pham_id, noi_dung, tai_khoan_id, ngay_dang) VALUES (:san_pham_id, :noi_dung, :tai_khoan_id, :ngay_dang)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':san_pham_id' => $san_pham_id,
+                ':noi_dung' => $noi_dung,
+                ':tai_khoan_id' => $tai_khoan_id,
+                ':ngay_dang' => $ngay_dang
+            ]);
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }
 ?>

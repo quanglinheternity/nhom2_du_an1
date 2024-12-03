@@ -6,7 +6,7 @@ require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
-require_once './controllers/DashboardController.php';
+require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminThuongHieuController.php';
 
 require_once './controllers/AdminsanPhamController.php';
@@ -19,6 +19,7 @@ require_once './controllers/AdminDonHangController.php';
 
 
 // Require toàn bộ file Models
+require_once './models/AdminThongKe.php';
 require_once './models/AdminThuongHieu.php';
 
 require_once './models/AdminSanPham.php';
@@ -47,7 +48,7 @@ if (!in_array($act, $allowedActions) && empty($_SESSION['error'])) {
 // Các Thầy.Cô có thể dùng Switch-Case
 match ($act) {
     // Trang chủ
-    '/' => (new DashboardController)->dashboard(),
+    '/' => (new AdminBaoCaoThongKeController())->dashboard(),
     'thuong_hieu' => (new AdminThuongHieuController())->danhSachThuongHieu(),
     'form_them_thuong_hieu' => (new AdminThuongHieuController())->formAddThuongHieu(),
     'them_thuong_hieu' => (new AdminThuongHieuController())->postAddThuongHieu(),
@@ -109,4 +110,6 @@ match ($act) {
     'form_sua_thong_tin_ca_nhan_quan_tri' => (new AdminTaiKhoanController())->formEditCaNhanQuanTri(),
     'sua_thong_tin_ca_nhan_quan_tri' => (new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
     'sua_mat_khau_ca_nhan_quan_tri' => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
+    //biểu đồ
+    'bieu_do' => (new AdminBaoCaoThongKeController())->bieuDo(),
 };

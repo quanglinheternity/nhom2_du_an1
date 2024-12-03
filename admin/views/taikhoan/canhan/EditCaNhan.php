@@ -42,9 +42,9 @@ include './views/layout/navbar.php'
 
             <div class="col-md-3">
                 <div class="text-center">
-                    <img src="<?= BASE_URL_ADMIN . $thongTin['anh_dai_dien']; ?>" style="width: 100px;" class="avatar img-circle" alt="avatar" onerror="this.onerror=null; this.src= 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010'">
+                    <img src="<?= BASE_URL . $thongTin['anh_dai_dien']; ?>" style="width: 100px;" class="avatar img-circle" alt="avatar" onerror="this.onerror=null; this.src= 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010'">
                     <h6 class="mt-2">Họ tên : <?= $thongTin['ho_ten'] ?> </h6>
-                    <h6 class="mt-2">chức vụ : <?= $thongTin['chuc_vu_id'] ?> </h6>
+                    <h6 class="mt-2">chức vụ : <?= $thongTin['chuc_vu_id'] ==1 ? 'Admin' : 'Khách' ?> </h6>
 
 
 
@@ -53,7 +53,7 @@ include './views/layout/navbar.php'
 
             <!-- edit form column -->
             <div class="col-md-9 personal-info">
-                <form action="<?= BASE_URL_ADMIN . '?act=sua_thong_tin_ca_nhan_quan_tri' ?>" method="post">
+                <form action="<?= BASE_URL_ADMIN . '?act=sua_thong_tin_ca_nhan_quan_tri' ?>" method="post"  enctype="multipart/form-data">
                     <input type="hidden" name="ca_nhan_id" value="<?php echo $thongTin['id'] ?>">
                     <hr>
                     <h3>Thông tin cá nhân</h3>
@@ -65,6 +65,13 @@ include './views/layout/navbar.php'
                             placeholder="Nhập họ tên">
                         <?php if (isset($_SESSION['error']['ho_ten'])) { ?>
                             <p class="text-danger"><?= $_SESSION['error']['ho_ten'] ?></p>
+                        <?php } ?>
+                    </div>
+                    <div class="form-group ">
+                        <label >Ảnh đại diện</label>
+                        <input type="file" class="form-control" name="anh_dai_dien" >
+                        <?php if(isset($_SESSION['error']['anh_dai_dien'])){ ?>
+                            <p class="text-danger"><?= $_SESSION['error']['anh_dai_dien'] ?></p>
                         <?php } ?>
                     </div>
 

@@ -173,7 +173,7 @@ class AdminTaiKhoan
         }
     }
 
-    public function updateCaNhan($id, $ho_ten, $email, $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi ,$trang_thai) {
+    public function updateCaNhan($id, $ho_ten, $email, $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi ,$trang_thai,$new_file) {
         try {
             $sql = 'UPDATE tai_khoans
                     SET 
@@ -183,7 +183,8 @@ class AdminTaiKhoan
                         ngay_sinh = :ngay_sinh,
                         gioi_tinh = :gioi_tinh,
                         dia_chi = :dia_chi,
-                        trang_thai = :trang_thai
+                        trang_thai = :trang_thai,
+                        anh_dai_dien = :new_file
                     WHERE id = :id';
             $stmt = $this->conn->prepare($sql);
     
@@ -195,6 +196,7 @@ class AdminTaiKhoan
                 ':gioi_tinh' => $gioi_tinh,
                 ':dia_chi' => $dia_chi,
                 ':trang_thai' => $trang_thai,
+                ':new_file' => $new_file,
                 ':id' => $id
             ]);
             // var_dump($sql); die();

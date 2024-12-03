@@ -293,7 +293,7 @@ class AdminTaiKhoanController
         // var_dump($thongTin);die();
 
         require_once './views/taikhoan/canhan/EditCaNhan.php';
-        deleteSessionError();
+        deleteSessionSuccess();
     }
     public function postEditMatKhauCaNhan()
     {
@@ -301,8 +301,6 @@ class AdminTaiKhoanController
             $old_pass = $_POST['old_pass'];
             $new_pass = $_POST['new_pass'];
             $confirm_pass = $_POST['confirm_pass'];
-
-
 
 
             $user = $this->moldedTaiKhoan->getTaiKhoanformemail($_SESSION['user_admin']);
@@ -353,10 +351,6 @@ class AdminTaiKhoanController
             $ca_nhan_id = $_POST['ca_nhan_id'] ?? '';
             // var_dump($ca_nhan_id); die();
             
-
-
-
-
             $ho_ten = $_POST['ho_ten'] ?? '';
             $email = $_POST['email'] ?? '';
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
@@ -364,8 +358,22 @@ class AdminTaiKhoanController
             $gioi_tinh = $_POST['gioi_tinh'] ?? '';
             $dia_chi = $_POST['dia_chi'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
+            $taiKhoan = $this->moldedTaiKhoan->getTaiKhoanQuanTriById($ca_nhan_id);
+            $old_file = $taiKhoan['anh_dai_dien']; //ảnh cũ
             // $hinh_anh = $_FILES['hinh_anh']  ?? null;
+            $hinh_anh = $_FILES['anh_dai_dien'] ?? null;
 
+            // xu ly upload file
+            $error = [];
+            if (isset($hinh_anh) && $hinh_anh['error'] == UPLOAD_ERR_OK) {
+                $new_file = uploadFile($hinh_anh, './uploads/');
+                if (!empty($old_file)) {
+                    deleteFile($old_file);
+                }
+            } else {
+                $new_file = $old_file;
+            }
+            // var_dump($new_file);die;
 
             $errors = [];
 
@@ -402,7 +410,8 @@ class AdminTaiKhoanController
                     $ngay_sinh,
                     $gioi_tinh,
                     $dia_chi,
-                    $trang_thai
+                    $trang_thai,
+                    $new_file
 
                 );
                 // var_dump($p);die();
