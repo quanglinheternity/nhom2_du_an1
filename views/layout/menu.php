@@ -80,7 +80,7 @@
                                             <?php } else{
                                             ?>
                                                 <li><a href="<?php echo BASE_URL . '?act=login_client' ?>">đăng nhập</a></li>
-                                                <li><a href="login-register.html" >đăng ký</a></li>
+                                                <li><a href="<?='?act=register'?>">đăng ký</a></li>
                                                 <?php } ?>
                                             </ul>
                                         </li>

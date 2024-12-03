@@ -6,7 +6,7 @@ require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
-require_once './controllers/DashboardController.php';
+require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminThuongHieuController.php';
 
 require_once './controllers/AdminsanPhamController.php';
@@ -19,6 +19,7 @@ require_once './controllers/AdminDonHangController.php';
 
 
 // Require toàn bộ file Models
+require_once './models/AdminThongKe.php';
 require_once './models/AdminThuongHieu.php';
 
 require_once './models/AdminSanPham.php';
@@ -47,7 +48,7 @@ if (!in_array($act, $allowedActions) && empty($_SESSION['error'])) {
 // Các Thầy.Cô có thể dùng Switch-Case
 match ($act) {
     // Trang chủ
-    '/' => (new DashboardController)->dashboard(),
+    '/' => (new AdminBaoCaoThongKeController())->dashboard(),
     'thuong_hieu' => (new AdminThuongHieuController())->danhSachThuongHieu(),
     'form_them_thuong_hieu' => (new AdminThuongHieuController())->formAddThuongHieu(),
     'them_thuong_hieu' => (new AdminThuongHieuController())->postAddThuongHieu(),
@@ -55,21 +56,21 @@ match ($act) {
     'sua_thuong_hieu' => (new AdminThuongHieuController())->postEditThuongHieu(),
     'xoa_thuong_hieu' => (new AdminThuongHieuController())->deleteThuongHieu(),
     // tài khoản quản trị
-    'list_tai_khoan_quan_tri'=>(new AdminTaiKhoanController())->listTaiKhoanQuanTri(),
-    'form_them_quan_tri'=>(new AdminTaiKhoanController())->formAddTaiKhoanQuanTri(),
-    'them_quan_tri'=>(new AdminTaiKhoanController())->postAddTaiKhoanQuanTri(),
-    'form_sua_quan_tri'=>(new AdminTaiKhoanController())->formEditTaiKhoanQuanTri(),
-    'sua_quan_tri'=>(new AdminTaiKhoanController())->postEditTaiKhoanQuanTri(),
-    'reset_password'=>(new AdminTaiKhoanController())->resetPassword(),
-    
-    
- // don hang
-    'don_hang'=>(new AdminDonHangController())->danhSachDonHang(),
-    'form_sua_don_hang'=>(new AdminDonHangController())->formEditDonHang(),
-    'sua_don_hang'=>(new AdminDonHangController())->postEditDonHang(),
-    'chi_tiet_don_hang'=>(new AdminDonHangController())->chiTietDonHangId(),
-    'huy_don_hang'=>(new AdminDonHangController())->huyDonHangId(),
-    'cap_nhat_don_hang'=>(new AdminDonHangController())->capNhatDonHangId(),
+    'list_tai_khoan_quan_tri' => (new AdminTaiKhoanController())->listTaiKhoanQuanTri(),
+    'form_them_quan_tri' => (new AdminTaiKhoanController())->formAddTaiKhoanQuanTri(),
+    'them_quan_tri' => (new AdminTaiKhoanController())->postAddTaiKhoanQuanTri(),
+    'form_sua_quan_tri' => (new AdminTaiKhoanController())->formEditTaiKhoanQuanTri(),
+    'sua_quan_tri' => (new AdminTaiKhoanController())->postEditTaiKhoanQuanTri(),
+    'reset_password' => (new AdminTaiKhoanController())->resetPassword(),
+
+
+    // don hang
+    'don_hang' => (new AdminDonHangController())->danhSachDonHang(),
+    'form_sua_don_hang' => (new AdminDonHangController())->formEditDonHang(),
+    'sua_don_hang' => (new AdminDonHangController())->postEditDonHang(),
+    'chi_tiet_don_hang' => (new AdminDonHangController())->chiTietDonHangId(),
+    'huy_don_hang' => (new AdminDonHangController())->huyDonHangId(),
+    'cap_nhat_don_hang' => (new AdminDonHangController())->capNhatDonHangId(),
     'list_tai_khoan_quan_tri' => (new AdminTaiKhoanController())->listTaiKhoanQuanTri(),
     'form_them_quan_tri' => (new AdminTaiKhoanController())->formAddTaiKhoanQuanTri(),
     'them_quan_tri' => (new AdminTaiKhoanController())->postAddTaiKhoanQuanTri(),
@@ -78,9 +79,9 @@ match ($act) {
     'reset_password' => (new AdminTaiKhoanController())->resetPassword(),
 
     //route auth
-    'login_admin'=>(new AdminTaiKhoanController())->formLogin(),
-    'check_login_admin'=>(new AdminTaiKhoanController())->login(),
-    'logout_admin'=>(new AdminTaiKhoanController())->logOut(),
+    'login_admin' => (new AdminTaiKhoanController())->formLogin(),
+    'check_login_admin' => (new AdminTaiKhoanController())->login(),
+    'logout_admin' => (new AdminTaiKhoanController())->logOut(),
     'login_admin' => (new AdminTaiKhoanController())->formLogin(),
     'check_login_admin' => (new AdminTaiKhoanController())->login(),
     'logout_admin' => (new AdminTaiKhoanController())->logOut(),
@@ -99,9 +100,16 @@ match ($act) {
     //binh luan
     'update_trang_thai_binh_luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
     //quản lý tài khoản khách hàng
-    'list_tai_khoan_khach_hang'=>(new AdminTaiKhoanController())->listKhachHang(),
-    'form_sua_khach_hang'=>(new AdminTaiKhoanController())->formEditKhachHang(),
-    'sua_khach_hang'=>(new AdminTaiKhoanController())->postEditKhachHang(),
-    'chi_tiet_khach_hang'=>(new AdminTaiKhoanController())->chiTietKhachHang(),
-    
+    'list_tai_khoan_khach_hang' => (new AdminTaiKhoanController())->listKhachHang(),
+    'form_sua_khach_hang' => (new AdminTaiKhoanController())->formEditKhachHang(),
+    'sua_khach_hang' => (new AdminTaiKhoanController())->postEditKhachHang(),
+    'chi_tiet_khach_hang' => (new AdminTaiKhoanController())->chiTietKhachHang(),
+
+
+
+    'form_sua_thong_tin_ca_nhan_quan_tri' => (new AdminTaiKhoanController())->formEditCaNhanQuanTri(),
+    'sua_thong_tin_ca_nhan_quan_tri' => (new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
+    'sua_mat_khau_ca_nhan_quan_tri' => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
+    //biểu đồ
+    'bieu_do' => (new AdminBaoCaoThongKeController())->bieuDo(),
 };

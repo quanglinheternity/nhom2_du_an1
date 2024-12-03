@@ -9,11 +9,13 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once "./controllers/HomeController.php";
 
 
+
 // Require toàn bộ file Models
 require_once "./models/SanPham.php";
 require_once "./models/taiKhoan.php";
 require_once "./models/GioHang.php";
 require_once "./models/DonHang.php";
+require_once "./models/authController.php";
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -37,5 +39,7 @@ match ($act) {
     'delete_cart'=> (new HomeController())->deleteSp(),
     //mã giảm giá
     'ma_giam_gia'=> (new HomeController())->gioHang(),
-    default => throw new Exception("Unhandled match case '$act'"),
+    'register' => (new HomeController())->formRegister(),
+    'post_register' => (new HomeController())->postRegister(),
+    'them_binh_luan'=> (new HomeController())->themBinhLuan(),
 };

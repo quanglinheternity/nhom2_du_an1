@@ -48,8 +48,14 @@
                                 
                                     <tbody>
                                         <?php usort($donHang, function($a, $b) {
-                                            return $a['trang_thai_id'] <=> $b['trang_thai_id'];
-                                        });?>
+                                                // So sánh theo trạng thái trước (ưu tiên trạng thái cao hơn)
+                                                if ($a['trang_thai_id'] !== $b['trang_thai_id']) {
+                                                    return $a['trang_thai_id'] <=> $b['trang_thai_id'];
+                                                }
+                                                // Nếu trạng thái giống nhau, so sánh theo ngày đặt (mới nhất trước)
+                                                return strtotime($b['ngay_dat']) <=> strtotime($a['ngay_dat']);
+                                            });
+                                        ?>
                                         <?php foreach($donHang as $don): ?>
                                             <tr>
                                                 <th class="text-center"><?= $don['ma_don_hang'] ?></th>

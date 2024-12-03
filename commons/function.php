@@ -73,6 +73,22 @@ function deleteSessionError() {
     // Destroy the session
     // session_destroy();
 }
+function deleteSessionSuccess() {
+   
+
+    // Check if the flash message is set and then unset it
+    if (isset($_SESSION['success'])) {
+        unset($_SESSION['success']);
+        // session_unset();
+    }
+
+    // Unset all session variables
+   
+    
+    // Destroy the session
+    // session_destroy();
+}
+
 
 // Upload - updeatealbum ảnh
 function uploadFileAlbum($file, $folderUpload, $key) {

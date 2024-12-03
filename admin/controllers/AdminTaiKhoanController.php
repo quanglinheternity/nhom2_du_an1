@@ -264,7 +264,6 @@ class AdminTaiKhoanController
                 $_SESSION['flash'] = true;
                 header('location: ' . BASE_URL_ADMIN . '?act=form_sua_khach_hang&id_khach_hang=' . $khach_hang_id);
                 exit();
-
             }
         }
     }
@@ -279,11 +278,151 @@ class AdminTaiKhoanController
 
 
         require_once './views/taikhoan/khachhang/chiTietKhachHang.php';
-
     }
-    public function getTaiKhoanByIdFormLayout(){
-        $emailTaikhoan =$_SESSION['user_admin'];
+    public function getTaiKhoanByIdFormLayout()
+    {
+        $emailTaikhoan = $_SESSION['user_admin'];
         $listTaiKhoan = $this->moldedTaiKhoan->getTaiKhoanFormEmail($emailTaikhoan);
         return $listTaiKhoan;
+    }
+
+    public function formEditCaNhanQuanTri()
+    {
+        $email = $_SESSION['user_admin'];
+        $thongTin = $this->moldedTaiKhoan->getTaiKhoanformemail($email);
+        // var_dump($thongTin);die();
+
+        require_once './views/taikhoan/canhan/EditCaNhan.php';
+        deleteSessionSuccess();
+    }
+    public function postEditMatKhauCaNhan()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $old_pass = $_POST['old_pass'];
+            $new_pass = $_POST['new_pass'];
+            $confirm_pass = $_POST['confirm_pass'];
+
+
+            $user = $this->moldedTaiKhoan->getTaiKhoanformemail($_SESSION['user_admin']);
+            //  var_dump($user);die;
+            $checkPass = password_verify($old_pass, $user['mat_khau']);
+
+            $errors = [];
+
+            if (!$checkPass) {
+                $errors['old_pass'] = "Mật khẩu người dùng không đúng";
+            }
+            if ($new_pass !== $confirm_pass) {
+                $errors['confirm_pass'] = "Mật khẩu nhập lại không đúng";
+            }
+            if (empty($old_pass)) {
+                $errors['old_pass'] = "Vui lòng điền trường dữ liệu này ";
+            }
+            if (empty($new_pass)) {
+                $errors['new_pass'] = "Vui lòng điền trường dữ liệu này ";
+            }
+            if (empty($confirm_pass)) {
+                $errors['confirm_pass'] = "Vui lòng điền trường dữ liệu này ";
+            }
+
+            $_SESSION['error'] = $errors;
+
+            if (!$errors) {
+                $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
+                $status = $this->moldedTaiKhoan->resetPassword($user['id'], $hashPass);
+                if ($status) {
+                    $_SESSION['success'] = "Đã đổi mật khẩu thành công";
+                    $_SESSION['flash'] = true;
+                    header('location: ' . BASE_URL_ADMIN . '?act=form_sua_thong_tin_ca_nhan_quan_tri');
+                }
+            } else {
+
+                // var_dump($_SESSION['error']);die();
+                $_SESSION['flash'] = true;
+                header('location: ' . BASE_URL_ADMIN . '?act=form_sua_thong_tin_ca_nhan_quan_tri');
+                exit();
+            }
+        }
+    }
+    public function postEditCaNhanQuanTri()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // var_dump($_POST); die();
+            $ca_nhan_id = $_POST['ca_nhan_id'] ?? '';
+            // var_dump($ca_nhan_id); die();
+            
+            $ho_ten = $_POST['ho_ten'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+            $ngay_sinh = $_POST['ngay_sinh'] ?? '';
+            $gioi_tinh = $_POST['gioi_tinh'] ?? '';
+            $dia_chi = $_POST['dia_chi'] ?? '';
+            $trang_thai = $_POST['trang_thai'] ?? '';
+            $taiKhoan = $this->moldedTaiKhoan->getTaiKhoanQuanTriById($ca_nhan_id);
+            $old_file = $taiKhoan['anh_dai_dien']; //ảnh cũ
+            // $hinh_anh = $_FILES['hinh_anh']  ?? null;
+            $hinh_anh = $_FILES['anh_dai_dien'] ?? null;
+
+            // xu ly upload file
+            $error = [];
+            if (isset($hinh_anh) && $hinh_anh['error'] == UPLOAD_ERR_OK) {
+                $new_file = uploadFile($hinh_anh, './uploads/');
+                if (!empty($old_file)) {
+                    deleteFile($old_file);
+                }
+            } else {
+                $new_file = $old_file;
+            }
+            // var_dump($new_file);die;
+
+            $errors = [];
+
+            if (empty($ho_ten)) {
+                $errors['ho_ten'] = 'Tên người dùng không được để trống ';
+            }
+            if (empty($email)) {
+                $errors['email'] = 'Email người dùng không được để trống ';
+            }
+
+            if (empty($ngay_sinh)) {
+                $errors['ngay_sinh'] = 'Ngày sinh người dùng không được để trống ';
+            }
+
+            if (empty($gioi_tinh)) {
+                $errors['gioi_tinh'] = 'Giới tính người dùng không được để trống ';
+            }
+
+            if (empty($trang_thai)) {
+                $errors['trang_thai'] = 'Vui lòng chọn trạng thái';
+            }
+
+            $_SESSION['error'] = $errors;
+            // var_dump($error); die();
+
+
+
+            if (empty($errors)) {
+                $p =  $this->moldedTaiKhoan->updateCaNhan(
+                    $ca_nhan_id,
+                    $ho_ten,
+                    $email,
+                    $so_dien_thoai,
+                    $ngay_sinh,
+                    $gioi_tinh,
+                    $dia_chi,
+                    $trang_thai,
+                    $new_file
+
+                );
+                // var_dump($p);die();
+                header("Location: " . BASE_URL_ADMIN . '?act=form_sua_thong_tin_ca_nhan_quan_tri');
+                exit();
+            } else {
+                $_SESSION['flash'] = true;
+
+                header("Location: " . BASE_URL_ADMIN . '?act=form_sua_thong_tin_ca_nhan_quan_tri=' . $ca_nhan_id);
+                exit();
+            }
+        }
     }
 }

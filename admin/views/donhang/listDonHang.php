@@ -67,9 +67,14 @@ include './views/layout/navbar.php'
                 <tbody>
                   <?php
                   // Sắp xếp $listDonHang theo trang_thai_id tăng dần
-                      usort($listDonHang, function($a, $b) {
+                  usort($listDonHang, function($a, $b) {
+                    // So sánh theo trạng thái trước (ưu tiên trạng thái cao hơn)
+                    if ($a['trang_thai_id'] !== $b['trang_thai_id']) {
                         return $a['trang_thai_id'] <=> $b['trang_thai_id'];
-                      });
+                    }
+                    // Nếu trạng thái giống nhau, so sánh theo ngày đặt (mới nhất trước)
+                    return strtotime($b['ngay_dat']) <=> strtotime($a['ngay_dat']);
+                });
                   foreach ($listDonHang as $key => $donHang) {
                     ?>
                     <tr>
