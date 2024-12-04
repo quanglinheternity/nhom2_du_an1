@@ -153,5 +153,21 @@ class sanPham {
             return $e->getMessage();
         }
     }
+    public function search($keyword)
+    {
+        try {
+            $sql = "SELECT * FROM san_phams
+            WHERE ten_san_pham LIKE :keyword
+            ORDER BY luot_xem DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':keyword' => '%' . $keyword . '%',
+            ]);
+    
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            throw new Exception("Error searching for products: " . $e->getMessage());
+        }
+    }
 }
 ?>

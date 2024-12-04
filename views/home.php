@@ -178,6 +178,7 @@
                                     <div class="product-carousel-4 slick-row-10 slick-arrow-style">
                                         <?php foreach($listSanPham as $key => $sanPham) : ?>
                                         <!-- product item start -->
+                                        <?php if ($sanPham['trang_thai'] == 1) : ?>
                                         <div class="product-item">
                                             <figure class="product-thumb">
                                                 <a href="<?php echo BASE_URL. '?act=chi_tiet_san_pham&id_san_pham='.$sanPham['id']?>">
@@ -231,6 +232,8 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <?php endif; ?>
                                         <?php endforeach; ?>
                                         <!-- product item end -->
                                     </div>
@@ -334,6 +337,8 @@
                     <div class="col-12">
                         <div class="product-carousel-4_2 slick-row-10 slick-arrow-style">
                             <?php foreach($listSanPham as $key => $sanPham) : ?>
+                                <?php if ($sanPham['trang_thai'] == 1) : ?>
+
                                         <!-- product item start -->
                                         <div class="product-item">
                                             <figure class="product-thumb">
@@ -388,6 +393,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php endif; ?>
+
                                         <?php endforeach; ?>
                                         <!-- product item end -->
          
@@ -417,7 +424,7 @@
                              <?php foreach($listThuongHieu as $key => $thuongHieu) : ?>
                             <div class="brand-item">
                                 <a href="#">
-                                    <img src="<?php echo BASE_URL . $thuongHieu['hinh_anh'] ?>" alt="" height="50px">
+                                    <img src="<?php echo BASE_URL . $thuongHieu['hinh_anh'] ?>" alt="" width="80px" height="60px">
                                 </a>
                             </div>
                             <!-- single brand end -->

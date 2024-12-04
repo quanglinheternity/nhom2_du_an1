@@ -72,4 +72,32 @@ class taiKhoan
             echo "Lỗi: " . $e->getMessage();
         }
     }
+    public function thongTinTaiKhoan($id){
+        try{
+            $sql = "SELECT * FROM tai_khoans WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(
+                [
+                    ':id' => $id
+                ]
+            );
+            return $stmt->fetch();
+        }catch(Exception $e){
+            echo "Lỗi: ".$e->getMessage();
+        }
+    }
+    public function checkEmail($email){
+        try{
+            $sql = "SELECT * FROM tai_khoans WHERE email = :email";
+            $stmt = $this->conn->prepare($sql); 
+            $stmt->execute([
+                ':email' =>$email,
+        
+            ]);
+            
+            return $stmt->fetch();
+        }catch(Exception $e){
+            echo "Lỗi: ".$e->getMessage();
+        }
+    }
 }

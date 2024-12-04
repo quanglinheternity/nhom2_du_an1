@@ -145,7 +145,7 @@ class HomeController
       } else {
         $chiTietGioHang = $this->moldedGioHang->getDetailGioHang($gioHang['id']);
       }
-      // var_dump($maGiam); die();
+      // var_dump($chiTietGioHang); die();
       require_once './views/gioHang.php';
     } else {
       header('location:' . BASE_URL . '?act=login_client');
@@ -414,4 +414,68 @@ class HomeController
       exit();
     }
   }
+  public function quenMatKhau()
+    {
+
+        require_once './views/quenMatKhau.php';
+        deleteSessionError();
+    }
+    public function layMatKhau()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Lấy ra dl
+
+            $email = $_POST['email'] ?? '';
+
+            $checkEmail = $this->moldedTaiKhoan->checkEmail($email);
+            // var_dump($checkEmail);die();
+            $tai_khoan_id=$checkEmail['id'];
+            $password = password_hash('Qlinh371', PASSWORD_BCRYPT);
+            $sataus = (new AdminTaiKhoan)->resetPassword($tai_khoan_id, $password);
+            
+            // var_dump($checkEmail['mat_khau']);die();
+
+            if (is_array($checkEmail)) {
+                //     $_SESSION['user_id'] = $checkUser[0]['id'];
+                $_SESSION['layMk'] = 'Mật khẩu của bạn là: Qlinh371 ' ;
+
+                header('Location:' . BASE_URL . '?act=quen_mat_khau');
+            } else {
+                $_SESSION['flash'] = true;
+                $_SESSION['layMk'] = 'Email không tồn tại';
+
+                header('Location:' . BASE_URL . '?act=quen_mat_khau');
+            }
+        }
+    }
+
+    public function sanPhamThuongHieu()
+    {
+      $ThuongHieuId=$_GET['thuong_hieu_id'];
+      
+      $listSanPhamCungThuongHieu = $this->moldedSanPham->getListSanPhamThuongHieu($ThuongHieuId );
+      // var_dump($listSanPhamCungThuongHieu);die();
+      if ($listSanPhamCungThuongHieu) {
+        require_once './views/viewSanPham.php';
+      } else {
+        header('location: ' . BASE_URL);
+        exit();
+      }
+    }
+    public function timKiem()
+    {
+        $listDanhMuc = $this->moldedSanPham->getAllThuongHieu();
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $keyword = $_POST['tim_kiem'] ?? '';
+
+            $listSanPhamTimKiem = $this->moldedSanPham->search($keyword);
+            require_once './views/timKiemSp.php';
+
+
+            // var_dump($timsp);die();
+        }
+    }
 }

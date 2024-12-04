@@ -35,7 +35,7 @@
 
                                                 foreach($listThuongHieu as $ThuongHieu): ?>
                                                     <!-- <li><a href="#">blog left sidebar</a></li> -->
-                                                     <li><a href=""><?php echo $ThuongHieu['ten_thuong_hieu']?></a></li>
+                                                     <li><a href="<?=BASE_URL.'?act=san_pham_theo_thuong_hieu&thuong_hieu_id='.$ThuongHieu['id'] ?>"><?php echo $ThuongHieu['ten_thuong_hieu']?></a></li>
                                                    <?php endforeach ?>
                                                 </ul>
                                             </li>
@@ -55,8 +55,8 @@
                             <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                                 <div class="header-search-container">
                                     <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
-                                    <form class="header-search-box d-lg-none d-xl-block">
-                                        <input type="text" placeholder="Nhập tên sản phẩm ..." class="header-search-field">
+                                    <form class="header-search-box d-lg-none d-xl-block" action="<?=BASE_URL.'?act=search'?>" method="POST">
+                                        <input type="text" name="tim_kiem" placeholder="Nhập tên sản phẩm ..." class="header-search-field">
                                         <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                     </form>
                                 </div>
@@ -96,7 +96,7 @@
                                                 </svg>
                                                 </i> -->
                                                 <!-- <i class="bi bi-cart3"></i> -->
-                                                <div class="notification">2</div>
+                                                <!-- <div class="notification">2</div> -->
                                             </a>
                                         </li>
                                     </ul>
