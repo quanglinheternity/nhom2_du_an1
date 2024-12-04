@@ -14,6 +14,7 @@ require_once './controllers/AdminsanPhamController.php';
 
 require_once './controllers/AdminTaiKhoanController.php';
 require_once './controllers/AdminDonHangController.php';
+require_once './controllers/AdminMaGiamController.php';
 
 
 
@@ -27,6 +28,7 @@ require_once './models/AdminSanPham.php';
 
 require_once './models/AdminTaiKhoan.php';
 require_once './models/AdminDonHang.php';
+require_once './models/AdminMaGiam.php';
 
 
 
@@ -112,4 +114,14 @@ match ($act) {
     'sua_mat_khau_ca_nhan_quan_tri' => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
     //biểu đồ
     'bieu_do' => (new AdminBaoCaoThongKeController())->bieuDo(),
+    // mã giảm giá
+    'list_ma_giam_gia'=>(new AdminMaGiamController())->listMaGiamGia(),
+    'form_them_ma_giam_gia'=>(new AdminMaGiamController())->formAddMaGiamGia(),
+    'them_ma_giam_gia'=>(new AdminMaGiamController())->addMaGiamGia(),
+    'xoa_ma_giam_gia'=>(new AdminMaGiamController())->deleteMaGiam(),
+    'form_sua_ma_giam' => (new AdminMaGiamController())->formEditMaGiam(),
+    'sua_ma_giam'=>(new AdminMaGiamController())->editMaGiam()
+
+
+
 };
