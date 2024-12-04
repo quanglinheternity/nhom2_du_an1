@@ -77,7 +77,7 @@ include './views/layout/navbar.php'
                       <td>
                         <img src="<?= BASE_URL . $SanPham['hinh_anh'] ?>" style="width:100px;height:100px" alt="">
                       </td>
-                      <td><?= $SanPham['gia_san_pham'] ?></td>
+                      <td><?=formatPrice( $SanPham['gia_san_pham']) ?> đ</td>
                       <td><?= $SanPham['so_luong'] ?></td>
                       <td><?= $SanPham['ten_thuong_hieu'] ?></td>
                       <td><?= $SanPham['trang_thai'] == 1 ? 'Còn Bán' : 'Dừng Bán' ?></td>

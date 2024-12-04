@@ -56,7 +56,7 @@
                                             <div class="remember-meta">
                                                 
                                             </div>
-                                            <a href="#" class="forget-pwd">Quên mật khẩu ?</a>
+                                            <a href="?act=quen_mat_khau" class="forget-pwd">Quên mật khẩu ?</a>
                                         </div>
                                     </div>
                                     <div class="single-input-item">

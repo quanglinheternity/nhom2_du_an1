@@ -104,6 +104,7 @@
                     <div class="row">
                         <div class="col-lg-5 ml-auto">
                             <!-- Cart Calculation Area -->
+                             <?php if(!empty($chiTietGioHang)):?>
                             <div class="cart-calculator-wrapper">
                                 <div class="cart-calculate-items">
                                     <h6>Giỏ hàng tổng</h6>
@@ -144,6 +145,7 @@
                                 <a href="<?= BASE_URL . '?act=thanh_toan' ?><?= isset($maGiam) ? '&ma_id=' . ($maGiam[0]['gia_tri_giam'] ?? '') : '' ?>" class="btn btn-sqr d-block">Thanh toán</a>
 
                             </div>
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>

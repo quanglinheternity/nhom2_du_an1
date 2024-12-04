@@ -163,11 +163,13 @@ require_once './views/layout/header.php';
                                                         </div>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
+                                           
+                                            
                                                     <form action="<?= BASE_URL . '?act=them_binh_luan' ?>" method="POST" class="review-form">
                                                     <div class="form-group row">
                                                         <div class="col">
                                                             <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
-                                                            <input type="hidden" name="tai_khoan" value="<?=$_SESSION['user_client']?>">
+                                                            <?php if ( isset($_SESSION['user_client'])) : ?>     <input type="hidden" name="tai_khoan" value="<?=$_SESSION['user_client']?>">    <?php endif; ?>
                                                             <label class="col-form-label"><span class="text-danger">*</span>
                                                                 Nội dung bình luận</label>
                                                             <textarea class="form-control" required name="binh_luan"></textarea>
@@ -216,6 +218,8 @@ require_once './views/layout/header.php';
                     <div class="product-carousel-4 slick-row-10 slick-arrow-style">
                         <!-- product item start -->
                         <?php foreach ($listSanPhamCungThuongHieu as $key => $sanPham) : ?>
+                            <?php if ($sanPham['trang_thai'] == 1) : ?>
+
                             <div class="product-item">
                                 <figure class="product-thumb">
                                     <a href="<?php echo BASE_URL . '?act=chi_tiet_san_pham&id_san_pham=' . $sanPham['id'] ?>">
@@ -269,6 +273,8 @@ require_once './views/layout/header.php';
                                     </div>
                                 </div>
                             </div>
+                            <?php endif; ?>
+
                         <?php endforeach; ?>
                         <!-- product item end -->
                     </div>

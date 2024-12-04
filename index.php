@@ -10,12 +10,14 @@ require_once "./controllers/HomeController.php";
 
 
 
+
 // Require toàn bộ file Models
 require_once "./models/SanPham.php";
 require_once "./models/taiKhoan.php";
 require_once "./models/GioHang.php";
 require_once "./models/DonHang.php";
 require_once "./models/authController.php";
+require_once "./admin/models/AdminTaiKhoan.php";
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -42,4 +44,11 @@ match ($act) {
     'register' => (new HomeController())->formRegister(),
     'post_register' => (new HomeController())->postRegister(),
     'them_binh_luan'=> (new HomeController())->themBinhLuan(),
+    'quen_mat_khau'=>(new HomeController())->quenMatKhau(),
+    'lay_mat_khau' =>(new HomeController())->layMatKhau(),
+
+    'san_pham_theo_thuong_hieu' =>(new HomeController())->sanPhamThuongHieu(),
+   'search' =>(new HomeController())->timKiem(),
+
+
 };
