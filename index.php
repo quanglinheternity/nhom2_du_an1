@@ -49,6 +49,12 @@ match ($act) {
 
     'san_pham_theo_thuong_hieu' =>(new HomeController())->sanPhamThuongHieu(),
    'search' =>(new HomeController())->timKiem(),
+   //tài khoản
+   
+   'quan_ly_tai_khoan' =>(new HomeController())->suaTaiKhoan(),
+   'sua_thong_tin_ca_nhan' =>(new HomeController())->suaThongTinCaNhan(),
+   'sua_mat_khau' =>(new HomeController())->suaMatKhau(),
+   'sua_anh_tai_khoan' =>(new HomeController())->suaAnhTaiKhoan(),
 
 
 };

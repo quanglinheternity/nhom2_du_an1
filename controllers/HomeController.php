@@ -75,6 +75,9 @@ class HomeController
     if (isset($_SESSION['user_client'])) {
       unset($_SESSION['user_client']);
       unset($_SESSION['error']);
+        session_unset();
+        session_destroy();
+
     }
     header('location: ' . BASE_URL);
     exit();
@@ -419,6 +422,7 @@ class HomeController
 
         require_once './views/quenMatKhau.php';
         deleteSessionError();
+        deleteSessionLayMK();
     }
     public function layMatKhau()
     {
@@ -476,6 +480,193 @@ class HomeController
 
 
             // var_dump($timsp);die();
+        }
+    }
+    public function suaTaiKhoan()
+    {
+      if (isset($_SESSION['user_client'])) {
+      $thongTin = $this->moldedTaiKhoan->getTaiKhoanFormEmail($_SESSION['user_client']);
+    
+        // var_dump($thongTin);die();
+
+        require_once './views/suaThongTinTaiKhoan.php';
+        deleteSessionError();
+        deleteSessionErrorTt();
+        deleteSessionsuccessMK();
+        deleteSessionsuccessAnh();
+
+
+    } else {
+      header('location:' . BASE_URL . '?act=login_client');
+      exit();
+    }
+    }
+    public function suaThongTinCaNhan()
+    {
+        // xử lý form nhập
+        //var_dump($_POST);
+
+        // Kiểm tra xem dữ dữ liệu có phải đc submit lên không
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Lấy ra dl
+            // Lấy ra dữ liệu của sản phẩm
+            $tai_khoan_id = $_POST['tai_khoan_id'];
+            $ho_ten = $_POST['ho_ten'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+            $dia_chi = $_POST['dia_chi'] ?? '';
+
+
+            $_SESSION['ho_ten'] = $ho_ten ?? '';
+            $_SESSION['email'] = $email ?? '';
+
+
+
+
+            // Tạo 1 mảng trống để chứa dl
+            $errors = [];
+            if (empty($ho_ten)) {
+                $errors['ho_ten'] = 'Họ tên không được để trống';
+            }
+            if (empty($so_dien_thoai)) {
+                $errors['so_dien_thoai'] = 'Số điện thoại không được để trống';
+            }
+            if (empty($dia_chi)) {
+                $errors['dia_chi'] = 'Địa chỉ không được để trống';
+            }
+            if (empty($email)) {
+                $errors['email'] = 'Email không được để trống';
+            }
+
+            $_SESSION['errors'] = $errors;
+
+
+            // Nếu k có lỗi thì thêm sản phẩm
+            if (empty($errors)) {
+                $status = $this->moldedTaiKhoan->updateTaiKhoan($tai_khoan_id, $ho_ten, $email, $so_dien_thoai, $dia_chi);
+
+                if ($status) {
+                    $_SESSION['successTt'] = "Đã đổi thông tin thành công";
+                    $_SESSION['flash'] = true;
+                }
+                header("Location: " . BASE_URL . '?act=quan_ly_tai_khoan');
+                exit();
+            } else {
+                // trả lỗi
+                // Đặt chỉ thị xóa session sau khi hiển thị form
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL . '?act=quan_ly_tai_khoan');
+                exit();
+            }
+        }
+    }
+    public function suaMatKhau()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $old_pass = $_POST['old_pass'];
+            $new_pass = $_POST['new_pass'];
+            $confirm_pass = $_POST['confirm_pass']; 
+            $user = $this->moldedTaiKhoan->getTaiKhoanFormEmail($_SESSION['user_client']);
+
+            //  var_dump($user['mat_khau']);
+            //  var_dump($old_pass);
+            $errors = [];
+            $checkPass = password_verify($old_pass, $user['mat_khau']);
+            if (!$checkPass) {
+                $errors['old_pass'] = 'Mật đúng cũ không đúng';
+            }
+            if ($new_pass !== $confirm_pass) {
+                $errors['confirm_pass'] = 'Mật khẩu nhập lại không đúng';
+            }
+            
+
+            if (empty($old_pass)) {
+                $errors['old_pass'] = 'Mật khẩu cũ không được để trống';
+            }
+
+            if (empty($new_pass)) {
+                $errors['new_pass'] = 'Mật khẩu mới không được để trống';
+            }
+
+            if (empty($confirm_pass)) {
+                $errors['confirm_pass'] = 'Mật khẩu nhập lại không được để trống';
+            }
+            $_SESSION['errors'] = $errors;
+            if (!$errors) {
+                $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
+                $status = $this->moldedTaiKhoan->updateMatKhau($user['id'], $hashPass);
+                // var_dump($status);die();
+                if ($status) {
+                    $_SESSION['successMk'] = "Đã đổi mật khẩu thành công";
+                    $_SESSION['flash'] = true;
+
+                    header("Location:" . BASE_URL . '?act=quan_ly_tai_khoan');
+                }
+            } else {
+                // Lỗi thì lưu lỗi vào session
+                //    $_SESSION['errors'] = $user;
+                //    var_dump($_SESSION['errors']);die();
+
+                $_SESSION['flash'] = true;
+
+                header("Location:" . BASE_URL . '?act=quan_ly_tai_khoan');
+                exit();
+            }
+        }
+    }
+    public function suaAnhTaiKhoan()
+    {
+        // xử lý form nhập
+        //var_dump($_POST);
+
+        // Kiểm tra xem dữ dữ liệu có phải đc submit lên không
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Lấy ra dl
+            // Lấy ra dữ liệu của sản phẩm
+            $tai_khoan_id = $_POST['tai_khoan_id'];
+
+
+            $thongTinCu = $this->moldedTaiKhoan->thongTinTaiKhoan($tai_khoan_id);
+            // var_dump($thongTinCu);die();
+            $anh_cu = $thongTinCu['anh_dai_dien'];
+            // var_dump($anh_cu);die();
+
+            $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
+
+
+
+            // Logic sửa ảnh
+            if (isset($anh_dai_dien)) {
+                // upload file ảnh mới lên
+                $new_file = uploadFile($anh_dai_dien, './uploads/');
+                if (!empty($old_file)) { // Nếu có ảnh cũ thì xóa đi
+                    deleteFile($old_file);
+                }
+            } else {
+                $new_file = $anh_cu;
+            }
+
+            // Nếu k có lỗi thì thêm anh
+            if (empty($errors)) {
+                $status = $this->moldedTaiKhoan->updateAnhDaiDien($tai_khoan_id, $new_file);
+                // var_dump($status);die();
+
+                if ($status) {
+                    $_SESSION['successAnh'] = "Đã đổi thông tin thành công";
+                    $_SESSION['flash'] = true;
+                }
+                header("Location:" . BASE_URL . '?act=quan_ly_tai_khoan');
+
+                exit();
+            } else {
+                // trả lỗi
+                // Đặt chỉ thị xóa session sau khi hiển thị form
+                $_SESSION['flash'] = true;
+                header("Location:" . BASE_URL . '?act=quan_ly_tai_khoan');
+
+                exit();
+            }
         }
     }
 }

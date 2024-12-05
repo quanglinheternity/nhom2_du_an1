@@ -74,7 +74,7 @@
                                                 $name=preg_replace('/@.*/', '', $_SESSION['user_client']);
                                                 echo ucfirst($name)
                                             ?></a></li>
-                                            <li><a href="#">tài khoản</a></li>
+                                            <li><a href="<?= BASE_URL.'?act=quan_ly_tai_khoan' ?>">tài khoản</a></li>
                                             <li><a href="<?= BASE_URL.'?act=lich_su_mua_hang' ?>">Lịch sử mua hàng</a></li>
                                             <li><a href="<?= BASE_URL.'?act=logout_client' ?>"onclick="return confirm('Bạn có muốn đăng xuất?')" role="button">Đăng xuất</a></li>
                                             <?php } else{

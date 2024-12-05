@@ -88,6 +88,68 @@ function deleteSessionSuccess() {
     // Destroy the session
     // session_destroy();
 }
+function deleteSessionsuccessMK() {
+   
+
+    // Check if the flash message is set and then unset it
+    if (isset($_SESSION['successMk'])) {
+        unset($_SESSION['successMk']);
+        // session_unset();
+    }
+
+    // Unset all session variables
+   
+    
+    // Destroy the session
+    // session_destroy();
+}
+function deleteSessionsuccessAnh() {
+   
+
+    // Check if the flash message is set and then unset it
+    if (isset($_SESSION['successAnh'])) {
+        unset($_SESSION['successAnh']);
+        // session_unset();
+    }
+
+    // Unset all session variables
+   
+    
+    // Destroy the session
+    // session_destroy();
+}
+function deleteSessionLayMK() {
+   
+
+    // Check if the flash message is set and then unset it
+    if (isset($_SESSION['layMk'])) {
+        unset($_SESSION['layMk']);
+        // session_unset();
+    }
+
+    // Unset all session variables
+   
+    
+    // Destroy the session
+    // session_destroy();
+}
+function deleteSessionErrorTt() {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Check if the flash message is set and then unset it
+    if (isset($_SESSION['successTt'])) {
+        unset($_SESSION['successTt']);
+        // session_unset();
+    }
+
+    // Unset all session variables
+   
+    
+    // Destroy the session
+    // session_destroy();
+}
 
 
 // Upload - updeatealbum ảnh
